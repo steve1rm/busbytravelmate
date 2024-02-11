@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("it.nicolasfarabegoli.conventional-commits") version "3.1.3"
 }
 
 android {
@@ -47,6 +48,14 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+// example: git commit -am"chore: (android) adds conventional commits"
+// see: https://github.com/nicolasfara/conventional-commits
+conventionalCommits {
+    types += listOf()
+    scopes += listOf("android")
+    failureMessage = "The commit message does not meet the Conventional Commit standard"
 }
 
 dependencies {
