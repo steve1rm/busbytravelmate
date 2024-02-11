@@ -50,6 +50,8 @@ android {
     }
 }
 
+// example: git commit -am"chore: (android) adds conventional commits"
+// see: https://github.com/nicolasfara/conventional-commits
 conventionalCommits {
     types += listOf()
     scopes += listOf("android")
