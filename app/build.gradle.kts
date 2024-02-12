@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("it.nicolasfarabegoli.conventional-commits") version "3.1.3"
+    alias(libs.plugins.conventionalCommits)
 }
 
 android {
