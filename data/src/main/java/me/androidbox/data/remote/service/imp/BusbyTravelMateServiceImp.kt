@@ -2,6 +2,7 @@ package me.androidbox.data.remote.service.imp
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.post
 import io.ktor.http.ContentType.Application.FormUrlEncoded
@@ -16,7 +17,7 @@ import me.androidbox.data.remote.service.Routes.TOKEN_URL
 class BusbyTravelMateServiceImp(
 ) : BusbyTravelMateService {
 
-    private val httpClient = HttpClient {
+    private val httpClient = HttpClient(Android) {
         install(ContentNegotiation) {
             json()
         }
