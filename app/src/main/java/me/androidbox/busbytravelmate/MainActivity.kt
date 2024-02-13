@@ -10,7 +10,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
+import me.androidbox.data.remote.dto.TokenRequest
+import me.androidbox.data.remote.service.imp.BusbyTravelMateServiceImp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +28,13 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
+                    lifecycleScope.launch {
+                        BusbyTravelMateServiceImp().requestToken(TokenRequest(
+                            grantType = "client_credentials",
+                            clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
+                            clientSecret = "PGDukHIYKweKbYob"
+                        ))
+                    }
                 }
             }
         }
