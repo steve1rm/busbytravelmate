@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Busby Travel Mate"
 include(":app")
 include(":data")
+include(":domain")

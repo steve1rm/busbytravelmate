@@ -17,11 +17,14 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
         }
     }
     compileOptions {
@@ -31,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        this.buildConfig = true
+    }
 }
 
 dependencies {
@@ -39,6 +46,10 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
 
+    implementation(libs.koin.ktor)
+    implementation(libs.koin.android)
+
     testImplementation(libs.junit)
+    testImplementation(libs.koin.test.junit4)
     androidTestImplementation(libs.androidx.junit)
 }
