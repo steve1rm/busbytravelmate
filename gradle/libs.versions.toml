@@ -17,7 +17,7 @@ ktorVersion = "2.3.3"
 logbackClassicVersion = "1.2.3"
 appcompat = "1.6.1"
 material = "1.11.0"
-kotlinxSerializationJsonVersion = "1.5.1"
+kotlinxSerializationJsonVersion = "1.6.0"
 serializationVersion = "1.9.0"
 jetbrainsKotlinJvm = "1.9.0"
 
@@ -58,7 +58,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koinTestJunit4Version" }
-
+ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorVersion" }
 [bundles]
 ktor = [
     "ktorClientCore",

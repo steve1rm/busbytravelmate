@@ -18,5 +18,5 @@ data class TokenResponse(
     @SerialName("token_type")
     val tokenType: String,
     val type: String,
-    val username: String,
+    val username: String
 )
