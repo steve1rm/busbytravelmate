@@ -3,5 +3,5 @@ Travel and hotels finder app
 
 - [x] Jetpack Compose
 - [x] Koin
-- [x] Ktor
+- [x] Ktor client
 - [x] Clean architecture
