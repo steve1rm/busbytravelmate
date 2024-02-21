@@ -5,4 +5,10 @@ plugins {
     alias(libs.plugins.androidLibrary) apply false
     alias(libs.plugins.serialization) apply false
     alias(libs.plugins.jetbrainsKotlinJvm) apply false
+    alias(libs.plugins.ktfmt) apply false
+}
+
+subprojects {
+    apply(plugin = "com.ncorti.ktfmt.gradle")
+
 }

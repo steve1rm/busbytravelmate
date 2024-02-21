@@ -20,6 +20,7 @@ material = "1.11.0"
 kotlinxSerializationJsonVersion = "1.6.0"
 serializationVersion = "1.9.0"
 jetbrainsKotlinJvm = "1.9.0"
+ktfmtVersion = "0.17.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -77,5 +78,6 @@ conventionalCommits = { id = "it.nicolasfarabegoli.conventional-commits", versio
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationVersion" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmtVersion" }
 
 
