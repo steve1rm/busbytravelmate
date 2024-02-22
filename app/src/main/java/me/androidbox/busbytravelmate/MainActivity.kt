@@ -37,11 +37,18 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     lifecycleScope.launch {
-                        busbyTravelMateService.requestToken(TokenRequest(
-                            grantType = "client_credentials",
-                            clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
-                            clientSecret = "PGDukHIYKweKbYob"
-                        ))
+                        busbyTravelMateService
+                            .requestToken(TokenRequest(
+                                grantType = "client_credentials",
+                                clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
+                                clientSecret = "PGDukHIYKweKbYob"
+                            ))
+                            .onSuccess {
+                                println(it)
+                            }
+                            .onFailure {
+                                println(it)
+                            }
                     }
                 }
             }

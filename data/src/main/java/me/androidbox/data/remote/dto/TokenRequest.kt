@@ -12,4 +12,3 @@ data class TokenRequest(
     @SerialName("client_secret")
     val clientSecret: String
 )
-//grant_type=client_credentials&client_id=p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB&client_secret=PGDukHIYKweKbYob"
