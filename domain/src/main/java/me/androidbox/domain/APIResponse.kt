@@ -1,4 +1,4 @@
-package me.androidbox.utils
+package me.androidbox.domain
 
 import java.lang.Exception
 

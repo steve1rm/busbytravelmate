@@ -10,15 +10,15 @@ import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
 import me.androidbox.data.remote.service.BusbyTravelMateService
 import me.androidbox.data.remote.service.Routes.TOKEN_URL
-import me.androidbox.utils.APIResponse
-import me.androidbox.utils.safeApiRequest
+import me.androidbox.domain.APIResponse
+import me.androidbox.domain.safeApiRequest
 
 class BusbyTravelMateServiceImp(
     private val httpClient: HttpClient
 ) : BusbyTravelMateService {
 
     @OptIn(InternalAPI::class)
-    override suspend fun requestToken(tokenRequest: TokenRequest): APIResponse<TokenResponse> {
+    override suspend fun requestToken(tokenRequest: TokenRequest): me.androidbox.domain.APIResponse<TokenResponse> {
         val requestBody = "grant_type=${tokenRequest.grantType}&client_id=${tokenRequest.clientId}&client_secret=${tokenRequest.clientSecret}"
 
         return safeApiRequest {
