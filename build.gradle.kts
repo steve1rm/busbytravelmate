@@ -7,3 +7,13 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinJvm) apply false
     alias(libs.plugins.ktfmt) apply false
 }
+
+allprojects {
+    apply(plugin = "com.ncorti.ktfmt.gradle")
+
+    configure<com.ncorti.ktfmt.gradle.KtfmtExtension> {
+        kotlinLangStyle()
+
+        this.removeUnusedImports
+    }
+}

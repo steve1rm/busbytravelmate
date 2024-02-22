@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
-    alias(libs.plugins.ktfmt)
-}
+ }
 
 android {
     namespace = "me.androidbox.data"
@@ -41,10 +40,6 @@ android {
     }
 }
 
-configure<com.ncorti.ktfmt.gradle.KtfmtExtension> {
-    kotlinLangStyle()
-}
-
 dependencies {
     implementation(libs.bundles.ktor)
     implementation(libs.kotlinxSerializationJson)
@@ -57,6 +52,5 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.koin.test.junit4)
     testImplementation(libs.ktor.client.mock)
-    testImplementation("junit:junit:4.12")
     androidTestImplementation(libs.androidx.junit)
 }
