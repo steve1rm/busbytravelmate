@@ -1,5 +1,7 @@
 # busbytravelmate
 Travel and hotels finder app
 
-[] Jetpack Compose
-[] Ktor Client
+- [x] Jetpack Compose
+- [x] Koin
+- [x] Ktor client
+- [x] Clean architecture
