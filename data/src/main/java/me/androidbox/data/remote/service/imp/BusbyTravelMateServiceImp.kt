@@ -6,6 +6,7 @@ import io.ktor.client.request.post
 import io.ktor.http.ContentType.Application.FormUrlEncoded
 import io.ktor.http.contentType
 import io.ktor.util.InternalAPI
+import kotlinx.coroutines.delay
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
 import me.androidbox.data.remote.service.BusbyTravelMateService
@@ -18,10 +19,11 @@ class BusbyTravelMateServiceImp(
 ) : BusbyTravelMateService {
 
     @OptIn(InternalAPI::class)
-    override suspend fun requestToken(tokenRequest: TokenRequest): me.androidbox.domain.APIResponse<TokenResponse> {
+    override suspend fun requestToken(tokenRequest: TokenRequest): APIResponse<TokenResponse> {
         val requestBody = "grant_type=${tokenRequest.grantType}&client_id=${tokenRequest.clientId}&client_secret=${tokenRequest.clientSecret}"
 
         return safeApiRequest {
+    //        delay(500)
             httpClient
                 .post(TOKEN_URL) {
                     body = requestBody
