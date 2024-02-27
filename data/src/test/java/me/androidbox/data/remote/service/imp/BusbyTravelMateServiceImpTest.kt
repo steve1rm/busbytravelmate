@@ -10,6 +10,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.encodeToString
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
@@ -42,7 +43,7 @@ class BusbyTravelMateServiceImpTest {
     }
 
     @Test
-    fun `should make request to get token`() = runBlocking {
+    fun `should make request to get token`() = runTest {
         // Arrange
         val tokenResponse = TokenResponse(
             accessToken = UUID.randomUUID().toString(),
@@ -71,5 +72,12 @@ class BusbyTravelMateServiceImpTest {
 
         // Assert
         Assert.assertEquals(tokenResponse, actual.data)
+    }
+
+    @Test
+    fun dataIsHelloWorld() = runTest {
+        val data = BusbyTravelMateServiceImp(createMockEngine("")).fetchData()
+
+        Assert.assertEquals("Hello World!", data)
     }
 }

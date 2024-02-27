@@ -21,6 +21,8 @@ kotlinxSerializationJsonVersion = "1.6.0"
 serializationVersion = "1.9.0"
 jetbrainsKotlinJvm = "1.9.0"
 ktfmtVersion = "0.17.0"
+coroutinesTest = "1.8.0"
+securityCryptoVersion = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,6 +55,9 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndr
 koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koinKtorVersion" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxComposeVersion" }
 
+# Storage repositories
+securityCrypto = { module = "androidx.security:security-crypto", version.ref = "securityCryptoVersion" }
+
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -60,6 +65,8 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koinTestJunit4Version" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorVersion" }
+coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest"}
+
 [bundles]
 ktor = [
     "ktorClientCore",

@@ -10,6 +10,9 @@ import io.ktor.http.ContentType
 import io.ktor.http.ContentType.Application.FormUrlEncoded
 import io.ktor.http.Parameters
 import io.ktor.http.contentType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
 import me.androidbox.data.remote.service.BusbyTravelMateService
@@ -36,6 +39,13 @@ class BusbyTravelMateServiceImp(
                     accept(ContentType.Application.Json)
                 }
                 .body<TokenResponse>()
+        }
+    }
+
+    suspend fun fetchData(): String {
+        return withContext(Dispatchers.IO) {
+            delay(5000L)
+            "Hello World!"
         }
     }
 }
