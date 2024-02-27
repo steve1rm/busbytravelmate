@@ -2,11 +2,14 @@ package me.androidbox.data.remote.service.imp
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.accept
+import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
 import io.ktor.http.ContentType.Application.FormUrlEncoded
+import io.ktor.http.Parameters
 import io.ktor.http.contentType
-import io.ktor.util.InternalAPI
-import kotlinx.coroutines.delay
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
 import me.androidbox.data.remote.service.BusbyTravelMateService
@@ -18,16 +21,19 @@ class BusbyTravelMateServiceImp(
     private val httpClient: HttpClient
 ) : BusbyTravelMateService {
 
-    @OptIn(InternalAPI::class)
     override suspend fun requestToken(tokenRequest: TokenRequest): APIResponse<TokenResponse> {
-        val requestBody = "grant_type=${tokenRequest.grantType}&client_id=${tokenRequest.clientId}&client_secret=${tokenRequest.clientSecret}"
+        val requestBody = Parameters.build {
+            append("grant_type", tokenRequest.grantType)
+            append("client_id", tokenRequest.clientId)
+            append("client_secret", tokenRequest.clientSecret)
+        }
 
         return safeApiRequest {
-    //        delay(500)
             httpClient
                 .post(TOKEN_URL) {
-                    body = requestBody
+                    setBody(FormDataContent(requestBody))
                     contentType(FormUrlEncoded)
+                    accept(ContentType.Application.Json)
                 }
                 .body<TokenResponse>()
         }

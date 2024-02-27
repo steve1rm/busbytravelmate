@@ -43,9 +43,6 @@ class MainActivity : ComponentActivity() {
                                 clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
                                 clientSecret = "PGDukHIYKweKbYob"
                             ))
-                            .onLoading {
-                                println("Loading...")
-                            }
                             .onSuccess {
                                 println(it)
                             }

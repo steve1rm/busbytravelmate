@@ -14,6 +14,7 @@ import kotlinx.serialization.encodeToString
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
 import me.androidbox.data.remote.service.BusbyTravelMateService
+import me.androidbox.domain.APIResponse
 import org.junit.Assert
 import org.junit.Test
 import java.util.UUID
@@ -66,9 +67,9 @@ class BusbyTravelMateServiceImpTest {
             clientSecret = UUID.randomUUID().toString())
 
         // Act
-        val actual = busbyTravelMateService.requestToken(tokenRequest)
+        val actual = busbyTravelMateService.requestToken(tokenRequest) as APIResponse.Success
 
         // Assert
-        Assert.assertEquals(tokenResponse, actual)
+        Assert.assertEquals(tokenResponse, actual.data)
     }
 }

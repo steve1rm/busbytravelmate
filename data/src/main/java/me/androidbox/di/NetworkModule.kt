@@ -5,6 +5,9 @@ import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.http.ContentType.Application.FormUrlEncoded
+import io.ktor.http.headers
+import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import me.androidbox.data.BuildConfig
@@ -14,7 +17,6 @@ import org.koin.dsl.module
 
 val networkModule = module {
     single { _ ->
-
         HttpClient(Android) {
             install(ContentNegotiation) {
                 json(Json {
