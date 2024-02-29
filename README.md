@@ -2,6 +2,7 @@
 Travel and hotels finder app
 
 - [x] Jetpack Compose
-- [x] Koin
+- [x] Koin dependency injection
 - [x] Ktor client
 - [x] Clean architecture
+- [x] Encrypted shared preferences 
