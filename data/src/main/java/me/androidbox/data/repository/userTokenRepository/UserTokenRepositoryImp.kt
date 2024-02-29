@@ -9,7 +9,7 @@ class UserTokenRepositoryImp(
         userTokenLocalDataSource.saveUserToken(userToken)
     }
 
-    override suspend fun retrieveUserToken(): String? {
-        return userTokenLocalDataSource.retrieveUserToken()
+    override suspend fun fetchUserToken(): String? {
+        return userTokenLocalDataSource.fetchUserToken()
     }
 }

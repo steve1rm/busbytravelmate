@@ -13,7 +13,7 @@ import me.androidbox.data.remote.service.imp.BusbyTravelMateServiceImp
 import org.koin.dsl.module
 
 val networkModule = module {
-    single { _ ->
+    single<HttpClient> { _ ->
         HttpClient(Android) {
             install(ContentNegotiation) {
                 json(Json {
@@ -33,6 +33,6 @@ val networkModule = module {
     }
 
     factory<BusbyTravelMateService> {
-        BusbyTravelMateServiceImp(this.get())
+        BusbyTravelMateServiceImp(this.get<HttpClient>())
     }
 }

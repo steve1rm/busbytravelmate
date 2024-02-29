@@ -29,7 +29,7 @@ class UserTokenLocalDataSourceImp(context: Context) : UserTokenLocalDataSource {
         }
     }
 
-    override suspend fun retrieveUserToken(): String? {
+    override suspend fun fetchUserToken(): String? {
         return encryptedSharedPreferences.getString(TOKEN, null)
     }
 }

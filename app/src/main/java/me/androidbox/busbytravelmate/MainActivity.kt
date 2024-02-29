@@ -13,16 +13,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
-import me.androidbox.data.local.imp.UserTokenLocalDataSourceImp
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.service.BusbyTravelMateService
+import me.androidbox.repository.userTokenRepository.FetchUserTokenUseCase
+import me.androidbox.repository.userTokenRepository.SaveUserTokenUseCase
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
     private val busbyTravelMateService by inject<BusbyTravelMateService>()
+    private val saveUserTokenUseCase by inject<SaveUserTokenUseCase>()
+    private val fetchUserTokenUseCase by inject<FetchUserTokenUseCase>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         setContent {
             BusbyTravelMateTheme {
@@ -33,17 +38,18 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     lifecycleScope.launch {
-                        UserTokenLocalDataSourceImp(this@MainActivity).saveUserToken("this is the token test")
-                        UserTokenLocalDataSourceImp(this@MainActivity).retrieveUserToken()
-
                         busbyTravelMateService
                             .requestToken(TokenRequest(
                                 grantType = "client_credentials",
                                 clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
                                 clientSecret = "PGDukHIYKweKbYob"
                             ))
-                            .onSuccess {
-                                println(it)
+                            .onSuccess { tokenResponse ->
+                                println(tokenResponse)
+                                lifecycleScope.launch {
+                                    saveUserTokenUseCase.execute(tokenResponse.accessToken)
+                                    println(fetchUserTokenUseCase.execute())
+                                }
                             }
                             .onFailure {
                                 println(it)

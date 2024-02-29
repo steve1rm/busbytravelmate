@@ -1,9 +1,6 @@
 [versions]
 agp = "8.3.0-alpha18"
-koinAndroidVersion = "3.2.0"
-koinAndroidxComposeVersion = "3.2.0"
-koinKtorVersion = "3.2.0"
-koinTestJunit4Version = "3.2.0"
+koinVersion = "3.2.0"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -51,9 +48,10 @@ kotlinxSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serializati
 ktorSerializationJson = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
 
 # Dependency injection
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroidVersion" }
-koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koinKtorVersion" }
-koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinAndroidxComposeVersion" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinVersion" }
+koin-ktor = { module = "io.insert-koin:koin-ktor", version.ref = "koinVersion" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinVersion" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
 
 # Storage repositories
 securityCrypto = { module = "androidx.security:security-crypto", version.ref = "securityCryptoVersion" }
@@ -63,7 +61,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koinTestJunit4Version" }
+koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "koinVersion" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorVersion" }
 coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest"}
 
