@@ -9,13 +9,12 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.encodeToString
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
 import me.androidbox.data.remote.service.BusbyTravelMateService
-import me.androidbox.domain.APIResponse
+import me.androidbox.APIResponse
 import org.junit.Assert
 import org.junit.Test
 import java.util.UUID

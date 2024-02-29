@@ -17,8 +17,8 @@ import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.dto.TokenResponse
 import me.androidbox.data.remote.service.BusbyTravelMateService
 import me.androidbox.data.remote.service.Routes.TOKEN_URL
-import me.androidbox.domain.APIResponse
-import me.androidbox.domain.safeApiRequest
+import me.androidbox.APIResponse
+import me.androidbox.safeApiRequest
 
 class BusbyTravelMateServiceImp(
     private val httpClient: HttpClient
@@ -42,6 +42,7 @@ class BusbyTravelMateServiceImp(
         }
     }
 
+    /* testing -- smaple */
     suspend fun fetchData(): String {
         return withContext(Dispatchers.IO) {
             delay(5000L)

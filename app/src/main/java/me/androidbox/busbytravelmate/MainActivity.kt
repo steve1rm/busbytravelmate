@@ -10,17 +10,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.os.BuildCompat
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
+import me.androidbox.data.local.imp.UserTokenLocalDataSourceImp
 import me.androidbox.data.remote.dto.TokenRequest
 import me.androidbox.data.remote.service.BusbyTravelMateService
-import me.androidbox.data.remote.service.imp.BusbyTravelMateServiceImp
-import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
-import org.koin.androidx.compose.get
 
 class MainActivity : ComponentActivity() {
 
@@ -37,6 +33,9 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     lifecycleScope.launch {
+                        UserTokenLocalDataSourceImp(this@MainActivity).saveUserToken("this is the token test")
+                        UserTokenLocalDataSourceImp(this@MainActivity).retrieveUserToken()
+
                         busbyTravelMateService
                             .requestToken(TokenRequest(
                                 grantType = "client_credentials",

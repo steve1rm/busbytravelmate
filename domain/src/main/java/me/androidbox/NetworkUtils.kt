@@ -1,4 +1,4 @@
-package me.androidbox.domain
+package me.androidbox
 
 import java.util.concurrent.CancellationException
 
