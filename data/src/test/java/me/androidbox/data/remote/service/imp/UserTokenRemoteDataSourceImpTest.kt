@@ -11,9 +11,9 @@ import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.encodeToString
-import me.androidbox.data.remote.dto.TokenRequest
-import me.androidbox.data.remote.dto.TokenResponse
-import me.androidbox.data.remote.service.BusbyTravelMateService
+import me.androidbox.data.remote.dto.UserTokenRequestDto
+import me.androidbox.data.remote.dto.UserTokenDto
+import me.androidbox.data.remote.service.UserTokenRemoteDataSource
 import me.androidbox.APIResponse
 import org.junit.Assert
 import org.junit.Test
@@ -21,9 +21,9 @@ import java.util.UUID
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-class BusbyTravelMateServiceImpTest {
+class UserTokenRemoteDataSourceImpTest {
 
-    private lateinit var busbyTravelMateService: BusbyTravelMateService
+    private lateinit var userTokenRemoteDataSource: UserTokenRemoteDataSource
 
     private fun createMockEngine(content: String): HttpClient {
         val mockEngine = MockEngine {
@@ -44,7 +44,7 @@ class BusbyTravelMateServiceImpTest {
     @Test
     fun `should make request to get token`() = runTest {
         // Arrange
-        val tokenResponse = TokenResponse(
+        val tokenResponse = UserTokenDto(
             accessToken = UUID.randomUUID().toString(),
             applicationName = UUID.randomUUID().toString(),
             clientId = UUID.randomUUID().toString(),
@@ -59,15 +59,15 @@ class BusbyTravelMateServiceImpTest {
         val tokenResponseString = kotlinx.serialization.json.Json.encodeToString(tokenResponse)
 
         val client = createMockEngine(tokenResponseString)
-        busbyTravelMateService = BusbyTravelMateServiceImp(client)
+        userTokenRemoteDataSource = UserTokenRemoteDataSourceImp(client)
 
-        val tokenRequest = TokenRequest(
+        val tokenRequest = UserTokenRequestDto(
             grantType = UUID.randomUUID().toString(),
             clientId = UUID.randomUUID().toString(),
             clientSecret = UUID.randomUUID().toString())
 
         // Act
-        val actual = busbyTravelMateService.requestToken(tokenRequest) as APIResponse.Success
+        val actual = userTokenRemoteDataSource.requestToken(tokenRequest) as APIResponse.Success
 
         // Assert
         Assert.assertEquals(tokenResponse, actual.data)
@@ -75,7 +75,7 @@ class BusbyTravelMateServiceImpTest {
 
     @Test
     fun dataIsHelloWorld() = runTest {
-        val data = BusbyTravelMateServiceImp(createMockEngine("")).fetchData()
+        val data = UserTokenRemoteDataSourceImp(createMockEngine("")).fetchData()
 
         Assert.assertEquals("Hello World!", data)
     }

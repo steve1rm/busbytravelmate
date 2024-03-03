@@ -13,18 +13,18 @@ import io.ktor.http.contentType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import me.androidbox.data.remote.dto.TokenRequest
-import me.androidbox.data.remote.dto.TokenResponse
-import me.androidbox.data.remote.service.BusbyTravelMateService
-import me.androidbox.data.remote.service.Routes.TOKEN_URL
 import me.androidbox.APIResponse
+import me.androidbox.data.remote.dto.UserTokenRequestDto
+import me.androidbox.data.remote.service.Routes.TOKEN_URL
+import me.androidbox.data.remote.service.UserTokenRemoteDataSource
+import me.androidbox.model.UserTokenModel
 import me.androidbox.safeApiRequest
 
-class BusbyTravelMateServiceImp(
+class UserTokenRemoteDataSourceImp(
     private val httpClient: HttpClient
-) : BusbyTravelMateService {
+) : UserTokenRemoteDataSource {
 
-    override suspend fun requestToken(tokenRequest: TokenRequest): APIResponse<TokenResponse> {
+    override suspend fun requestToken(tokenRequest: UserTokenRequestDto): APIResponse<UserTokenModel> {
         val requestBody = Parameters.build {
             append("grant_type", tokenRequest.grantType)
             append("client_id", tokenRequest.clientId)
@@ -38,7 +38,7 @@ class BusbyTravelMateServiceImp(
                     contentType(FormUrlEncoded)
                     accept(ContentType.Application.Json)
                 }
-                .body<TokenResponse>()
+                .body<UserTokenModel>()
         }
     }
 

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TokenRequest(
+data class UserTokenRequestDto(
     @SerialName("grant_type")
     val grantType: String,
     @SerialName("client_id")

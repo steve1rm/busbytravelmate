@@ -8,8 +8,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import me.androidbox.data.BuildConfig
-import me.androidbox.data.remote.service.BusbyTravelMateService
-import me.androidbox.data.remote.service.imp.BusbyTravelMateServiceImp
+import me.androidbox.data.remote.service.imp.UserTokenRemoteDataSourceImp
 import org.koin.dsl.module
 
 val networkModule = module {
@@ -32,7 +31,7 @@ val networkModule = module {
         }
     }
 
-    factory<BusbyTravelMateService> {
-        BusbyTravelMateServiceImp(this.get<HttpClient>())
+    factory<me.androidbox.data.remote.service.UserTokenRemoteDataSource> {
+        UserTokenRemoteDataSourceImp(this.get<HttpClient>())
     }
 }

@@ -13,15 +13,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
-import me.androidbox.data.remote.dto.TokenRequest
-import me.androidbox.data.remote.service.BusbyTravelMateService
+import me.androidbox.data.remote.dto.UserTokenRequestDto
+import me.androidbox.data.remote.service.UserTokenRemoteDataSource
 import me.androidbox.repository.userTokenRepository.FetchUserTokenUseCase
 import me.androidbox.repository.userTokenRepository.SaveUserTokenUseCase
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-    private val busbyTravelMateService by inject<BusbyTravelMateService>()
+    private val userTokenRemoteDataSource by inject<UserTokenRemoteDataSource>()
     private val saveUserTokenUseCase by inject<SaveUserTokenUseCase>()
     private val fetchUserTokenUseCase by inject<FetchUserTokenUseCase>()
 
@@ -38,8 +38,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     lifecycleScope.launch {
-                        busbyTravelMateService
-                            .requestToken(TokenRequest(
+                        userTokenRemoteDataSource
+                            .requestToken(UserTokenRequestDto(
                                 grantType = "client_credentials",
                                 clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
                                 clientSecret = "PGDukHIYKweKbYob"
