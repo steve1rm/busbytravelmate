@@ -14,14 +14,15 @@ class UserTokenRepositoryImp(
 
     override suspend fun requestUserToken(userTokenRequestModel: UserTokenRequestModel): APIResponse<UserTokenModel> {
         val apiResponse = userTokenRemoteDataSource.requestUserToken(userTokenRequestModel.toUserTokenRequestDto())
-            return when(apiResponse) {
-                is APIResponse.Success -> {
-                    APIResponse.Success(apiResponse.data.toUserTokenModel())
-                }
-                is APIResponse.Failure -> {
-                    APIResponse.Failure(apiResponse.error)
-                }
+
+        return when(apiResponse) {
+            is APIResponse.Success -> {
+                APIResponse.Success(apiResponse.data.toUserTokenModel())
             }
+            is APIResponse.Failure -> {
+                APIResponse.Failure(apiResponse.error)
+            }
+        }
     }
 
     override suspend fun saveUserToken(userToken: String) {

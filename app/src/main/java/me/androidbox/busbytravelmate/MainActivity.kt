@@ -15,22 +15,15 @@ import kotlinx.coroutines.launch
 import me.androidbox.busbytravelmate.mappers.toUserTokenRequestModel
 import me.androidbox.busbytravelmate.model.UserTokenRequest
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
-import me.androidbox.data.remote.service.UserTokenRemoteDataSource
-import me.androidbox.repository.userTokenRepository.usecases.FetchUserTokenUseCase
 import me.androidbox.repository.userTokenRepository.usecases.RequestUserTokenUseCase
 import org.koin.android.ext.android.inject
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
-
-/*
-    private val userTokenRemoteDataSource by inject<UserTokenRemoteDataSource>()
-    private val fetchUserTokenUseCase by inject<FetchUserTokenUseCase>()
-*/
     private val requestUserTokenUseCase by inject<RequestUserTokenUseCase>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         setContent {
             BusbyTravelMateTheme {
@@ -46,24 +39,12 @@ class MainActivity : ComponentActivity() {
                             clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
                             clientSecret = "PGDukHIYKweKbYob"
                         ).toUserTokenRequestModel())
-
-                     /*   val apiResponse = userTokenRemoteDataSource
-                            .requestToken(UserTokenRequestDto(
-                                grantType = "client_credentials",
-                                clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
-                                clientSecret = "PGDukHIYKweKbYob"
-                            ))
-
-                        when(apiResponse) {
-                            is APIResponse.Success -> {
-                                Timber.d(apiResponse.data.accessToken)
-                                // Maybe show success message box
+                            .onSuccess { userTokenModel ->
+                                Timber.d(userTokenModel.toString(), null)
                             }
-                            is APIResponse.Failure -> {
-                                Timber.e(apiResponse.error)
-                                // Maybe show a message box related to error
+                            .onFailure {
+                                Timber.e(it.message)
                             }
-                        } */
                     }
                 }
             }
