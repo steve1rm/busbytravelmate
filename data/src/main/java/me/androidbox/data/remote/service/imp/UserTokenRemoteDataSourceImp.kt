@@ -14,17 +14,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import me.androidbox.APIResponse
+import me.androidbox.data.remote.dto.UserTokenDto
 import me.androidbox.data.remote.dto.UserTokenRequestDto
 import me.androidbox.data.remote.service.Routes.TOKEN_URL
 import me.androidbox.data.remote.service.UserTokenRemoteDataSource
-import me.androidbox.model.UserTokenModel
 import me.androidbox.safeApiRequest
 
 class UserTokenRemoteDataSourceImp(
     private val httpClient: HttpClient
 ) : UserTokenRemoteDataSource {
 
-    override suspend fun requestToken(tokenRequest: UserTokenRequestDto): APIResponse<UserTokenModel> {
+    override suspend fun requestUserToken(tokenRequest: UserTokenRequestDto): APIResponse<UserTokenDto> {
         val requestBody = Parameters.build {
             append("grant_type", tokenRequest.grantType)
             append("client_id", tokenRequest.clientId)
@@ -38,7 +38,7 @@ class UserTokenRemoteDataSourceImp(
                     contentType(FormUrlEncoded)
                     accept(ContentType.Application.Json)
                 }
-                .body<UserTokenModel>()
+                .body<UserTokenDto>()
         }
     }
 

@@ -67,7 +67,7 @@ class UserTokenRemoteDataSourceImpTest {
             clientSecret = UUID.randomUUID().toString())
 
         // Act
-        val actual = userTokenRemoteDataSource.requestToken(tokenRequest) as APIResponse.Success
+        val actual = userTokenRemoteDataSource.requestUserToken(tokenRequest) as APIResponse.Success
 
         // Assert
         Assert.assertEquals(tokenResponse, actual.data)

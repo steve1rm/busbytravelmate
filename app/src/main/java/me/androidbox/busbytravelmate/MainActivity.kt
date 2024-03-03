@@ -12,18 +12,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import me.androidbox.busbytravelmate.mappers.toUserTokenRequestModel
+import me.androidbox.busbytravelmate.model.UserTokenRequest
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
-import me.androidbox.data.remote.dto.UserTokenRequestDto
 import me.androidbox.data.remote.service.UserTokenRemoteDataSource
-import me.androidbox.repository.userTokenRepository.FetchUserTokenUseCase
-import me.androidbox.repository.userTokenRepository.SaveUserTokenUseCase
+import me.androidbox.repository.userTokenRepository.usecases.FetchUserTokenUseCase
+import me.androidbox.repository.userTokenRepository.usecases.RequestUserTokenUseCase
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
+/*
     private val userTokenRemoteDataSource by inject<UserTokenRemoteDataSource>()
-    private val saveUserTokenUseCase by inject<SaveUserTokenUseCase>()
     private val fetchUserTokenUseCase by inject<FetchUserTokenUseCase>()
+*/
+    private val requestUserTokenUseCase by inject<RequestUserTokenUseCase>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,22 +41,29 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     lifecycleScope.launch {
-                        userTokenRemoteDataSource
+                        requestUserTokenUseCase.execute(UserTokenRequest(
+                            grantType = "client_credentials",
+                            clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
+                            clientSecret = "PGDukHIYKweKbYob"
+                        ).toUserTokenRequestModel())
+
+                     /*   val apiResponse = userTokenRemoteDataSource
                             .requestToken(UserTokenRequestDto(
                                 grantType = "client_credentials",
                                 clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
                                 clientSecret = "PGDukHIYKweKbYob"
                             ))
-                            .onSuccess { tokenResponse ->
-                                println(tokenResponse)
-                                lifecycleScope.launch {
-                                    saveUserTokenUseCase.execute(tokenResponse.accessToken)
-                                    println(fetchUserTokenUseCase.execute())
-                                }
+
+                        when(apiResponse) {
+                            is APIResponse.Success -> {
+                                Timber.d(apiResponse.data.accessToken)
+                                // Maybe show success message box
                             }
-                            .onFailure {
-                                println(it)
+                            is APIResponse.Failure -> {
+                                Timber.e(apiResponse.error)
+                                // Maybe show a message box related to error
                             }
+                        } */
                     }
                 }
             }
