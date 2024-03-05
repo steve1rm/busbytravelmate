@@ -5,4 +5,8 @@ Travel and hotels finder app
 - [x] Koin dependency injection
 - [x] Ktor client
 - [x] Clean architecture
-- [x] Encrypted shared preferences 
+- [x] Encrypted shared preferences
+- [x] Gradle version catalog
+- [x] kotlin coroutines
+- [x] MVVM
+- [x] Material design 3
