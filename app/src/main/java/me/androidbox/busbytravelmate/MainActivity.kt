@@ -10,21 +10,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.os.BuildCompat
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
+import me.androidbox.busbytravelmate.mappers.toUserTokenRequestModel
+import me.androidbox.busbytravelmate.model.UserTokenRequest
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
-import me.androidbox.data.remote.dto.TokenRequest
-import me.androidbox.data.remote.service.BusbyTravelMateService
-import me.androidbox.data.remote.service.imp.BusbyTravelMateServiceImp
-import org.koin.android.ext.android.get
+import me.androidbox.repository.userTokenRepository.usecases.GetUserTokenUseCase
+import me.androidbox.repository.userTokenRepository.usecases.RequestUserTokenUseCase
 import org.koin.android.ext.android.inject
-import org.koin.androidx.compose.get
+import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
+    private val requestUserTokenUseCase by inject<RequestUserTokenUseCase>()
+    private val getUserTokenUseCase by inject<GetUserTokenUseCase>()
 
-    private val busbyTravelMateService by inject<BusbyTravelMateService>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,18 +36,20 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     lifecycleScope.launch {
-                        busbyTravelMateService
-                            .requestToken(TokenRequest(
-                                grantType = "client_credentials",
-                                clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
-                                clientSecret = "PGDukHIYKweKbYob"
-                            ))
-                            .onSuccess {
-                                println(it)
+                        requestUserTokenUseCase
+                            .execute(
+                                UserTokenRequest(
+                                        grantType = "client_credentials",
+                                        clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
+                                        clientSecret = "PGDukHIYKweKbYob"
+                                    )
+                                    .toUserTokenRequestModel()
+                            )
+                            .onSuccess { userTokenModel ->
+                                Timber.d(userTokenModel.toString(), null)
+                                Timber.d(getUserTokenUseCase.execute())
                             }
-                            .onFailure {
-                                println(it)
-                            }
+                            .onFailure { Timber.e(it.message) }
                     }
                 }
             }
@@ -58,16 +59,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    Text(text = "Hello $name!", modifier = modifier)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    BusbyTravelMateTheme {
-        Greeting("Android")
-    }
+    BusbyTravelMateTheme { Greeting("Android") }
 }

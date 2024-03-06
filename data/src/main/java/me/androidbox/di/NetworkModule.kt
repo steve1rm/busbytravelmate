@@ -5,24 +5,22 @@ import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.http.ContentType.Application.FormUrlEncoded
-import io.ktor.http.headers
-import io.ktor.http.headersOf
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import me.androidbox.data.BuildConfig
-import me.androidbox.data.remote.service.BusbyTravelMateService
-import me.androidbox.data.remote.service.imp.BusbyTravelMateServiceImp
+import me.androidbox.data.remote.service.imp.UserTokenRemoteDataSourceImp
 import org.koin.dsl.module
 
 val networkModule = module {
-    single { _ ->
+    single<HttpClient> { _ ->
         HttpClient(Android) {
             install(ContentNegotiation) {
-                json(Json {
-                    prettyPrint = true
-                    ignoreUnknownKeys = true
-                })
+                json(
+                    Json {
+                        prettyPrint = true
+                        ignoreUnknownKeys = true
+                    }
+                )
             }
 
             install(Logging) {
@@ -35,7 +33,7 @@ val networkModule = module {
         }
     }
 
-    factory<BusbyTravelMateService> {
-        BusbyTravelMateServiceImp(this.get())
+    factory<me.androidbox.data.remote.service.UserTokenRemoteDataSource> {
+        UserTokenRemoteDataSourceImp(this.get<HttpClient>())
     }
 }

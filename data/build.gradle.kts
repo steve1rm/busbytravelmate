@@ -47,12 +47,16 @@ dependencies {
     implementation(libs.kotlinxSerializationJson)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.timber)
 
     implementation(libs.koin.ktor)
     implementation(libs.koin.android)
-     
+
+    implementation(libs.securityCrypto)
+
     testImplementation(libs.junit)
     testImplementation(libs.koin.test.junit4)
     testImplementation(libs.ktor.client.mock)
+    testImplementation(libs.coroutinesTest)
     androidTestImplementation(libs.androidx.junit)
 }
