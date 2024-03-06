@@ -15,12 +15,14 @@ fun UserTokenDto.toUserTokenModel(): UserTokenModel {
         state = this.state,
         tokenType = this.tokenType,
         type = this.type,
-        username = this.username)
+        username = this.username
+    )
 }
 
 fun UserTokenRequestModel.toUserTokenRequestDto(): UserTokenRequestDto {
     return UserTokenRequestDto(
         grantType = this.grantType,
         clientId = this.clientId,
-        clientSecret = this.clientSecret)
+        clientSecret = this.clientSecret
+    )
 }

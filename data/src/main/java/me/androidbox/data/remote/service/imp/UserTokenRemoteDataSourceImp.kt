@@ -20,16 +20,17 @@ import me.androidbox.data.remote.service.Routes.TOKEN_URL
 import me.androidbox.data.remote.service.UserTokenRemoteDataSource
 import me.androidbox.safeApiRequest
 
-class UserTokenRemoteDataSourceImp(
-    private val httpClient: HttpClient
-) : UserTokenRemoteDataSource {
+class UserTokenRemoteDataSourceImp(private val httpClient: HttpClient) : UserTokenRemoteDataSource {
 
-    override suspend fun requestUserToken(tokenRequest: UserTokenRequestDto): APIResponse<UserTokenDto> {
-        val requestBody = Parameters.build {
-            append("grant_type", tokenRequest.grantType)
-            append("client_id", tokenRequest.clientId)
-            append("client_secret", tokenRequest.clientSecret)
-        }
+    override suspend fun requestUserToken(
+        tokenRequest: UserTokenRequestDto
+    ): APIResponse<UserTokenDto> {
+        val requestBody =
+            Parameters.build {
+                append("grant_type", tokenRequest.grantType)
+                append("client_id", tokenRequest.clientId)
+                append("client_secret", tokenRequest.clientSecret)
+            }
 
         return safeApiRequest {
             httpClient

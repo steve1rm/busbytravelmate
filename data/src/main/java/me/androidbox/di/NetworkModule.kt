@@ -15,10 +15,12 @@ val networkModule = module {
     single<HttpClient> { _ ->
         HttpClient(Android) {
             install(ContentNegotiation) {
-                json(Json {
-                    prettyPrint = true
-                    ignoreUnknownKeys = true
-                })
+                json(
+                    Json {
+                        prettyPrint = true
+                        ignoreUnknownKeys = true
+                    }
+                )
             }
 
             install(Logging) {

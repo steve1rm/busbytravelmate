@@ -15,12 +15,14 @@ class UserTokenLocalDataSourceImp(context: Context) : UserTokenLocalDataSource {
     }
 
     private val masterKeys = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-    private val encryptedSharedPreferences = EncryptedSharedPreferences.create(
-        FILE_NAME,
-        masterKeys,
-        context,
-        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+    private val encryptedSharedPreferences =
+        EncryptedSharedPreferences.create(
+            FILE_NAME,
+            masterKeys,
+            context,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
 
     override suspend fun saveUserToken(token: String) {
         encryptedSharedPreferences.edit {

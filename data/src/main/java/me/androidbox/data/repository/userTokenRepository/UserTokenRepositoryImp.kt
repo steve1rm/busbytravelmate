@@ -1,4 +1,5 @@
 package me.androidbox.data.repository.userTokenRepository
+
 import me.androidbox.APIResponse
 import me.androidbox.data.local.UserTokenLocalDataSource
 import me.androidbox.data.remote.service.UserTokenRemoteDataSource
@@ -10,13 +11,20 @@ import me.androidbox.repository.userTokenRepository.UserTokenRepository
 
 class UserTokenRepositoryImp(
     private val userTokenLocalDataSource: UserTokenLocalDataSource,
-    private val userTokenRemoteDataSource: UserTokenRemoteDataSource) : UserTokenRepository {
+    private val userTokenRemoteDataSource: UserTokenRemoteDataSource
+) : UserTokenRepository {
 
-    override suspend fun requestUserToken(userTokenRequestModel: UserTokenRequestModel): APIResponse<UserTokenModel> {
-        val apiResponse = userTokenRemoteDataSource.requestUserToken(userTokenRequestModel.toUserTokenRequestDto())
+    override suspend fun requestUserToken(
+        userTokenRequestModel: UserTokenRequestModel
+    ): APIResponse<UserTokenModel> {
+        val apiResponse =
+            userTokenRemoteDataSource.requestUserToken(
+                userTokenRequestModel.toUserTokenRequestDto()
+            )
 
-        return when(apiResponse) {
+        return when (apiResponse) {
             is APIResponse.Success -> {
+                saveUserToken(apiResponse.data.accessToken)
                 APIResponse.Success(apiResponse.data.toUserTokenModel())
             }
             is APIResponse.Failure -> {

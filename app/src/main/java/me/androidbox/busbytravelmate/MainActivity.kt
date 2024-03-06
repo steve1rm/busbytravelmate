@@ -15,12 +15,14 @@ import kotlinx.coroutines.launch
 import me.androidbox.busbytravelmate.mappers.toUserTokenRequestModel
 import me.androidbox.busbytravelmate.model.UserTokenRequest
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
+import me.androidbox.repository.userTokenRepository.usecases.GetUserTokenUseCase
 import me.androidbox.repository.userTokenRepository.usecases.RequestUserTokenUseCase
 import org.koin.android.ext.android.inject
 import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
     private val requestUserTokenUseCase by inject<RequestUserTokenUseCase>()
+    private val getUserTokenUseCase by inject<GetUserTokenUseCase>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,17 +36,20 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                     lifecycleScope.launch {
-                        requestUserTokenUseCase.execute(UserTokenRequest(
-                            grantType = "client_credentials",
-                            clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
-                            clientSecret = "PGDukHIYKweKbYob"
-                        ).toUserTokenRequestModel())
+                        requestUserTokenUseCase
+                            .execute(
+                                UserTokenRequest(
+                                        grantType = "client_credentials",
+                                        clientId = "p8ioeKrMrtQkeOD8yuUjqtxaYG4Nt2KB",
+                                        clientSecret = "PGDukHIYKweKbYob"
+                                    )
+                                    .toUserTokenRequestModel()
+                            )
                             .onSuccess { userTokenModel ->
                                 Timber.d(userTokenModel.toString(), null)
+                                Timber.d(getUserTokenUseCase.execute())
                             }
-                            .onFailure {
-                                Timber.e(it.message)
-                            }
+                            .onFailure { Timber.e(it.message) }
                     }
                 }
             }
@@ -54,16 +59,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    Text(text = "Hello $name!", modifier = modifier)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    BusbyTravelMateTheme {
-        Greeting("Android")
-    }
+    BusbyTravelMateTheme { Greeting("Android") }
 }

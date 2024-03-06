@@ -2,9 +2,11 @@ package me.androidbox
 
 import java.lang.Exception
 
-sealed interface APIResponse<out T>  {
+sealed interface APIResponse<out T> {
     data class Success<T>(val data: T) : APIResponse<T>
+
     data class Failure(val error: Exception) : APIResponse<Nothing>
+
     suspend fun onSuccess(block: suspend (data: T) -> Unit): APIResponse<T> {
         if (this is Success) {
             block(data)
@@ -19,4 +21,3 @@ sealed interface APIResponse<out T>  {
         return this
     }
 }
-

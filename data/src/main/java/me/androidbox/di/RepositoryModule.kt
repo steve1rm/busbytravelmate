@@ -10,10 +10,11 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     single<UserTokenRepository> {
-        UserTokenRepositoryImp(this.get<UserTokenLocalDataSource>(), this.get<UserTokenRemoteDataSource>())
+        UserTokenRepositoryImp(
+            this.get<UserTokenLocalDataSource>(),
+            this.get<UserTokenRemoteDataSource>()
+        )
     }
 
-    single<UserTokenLocalDataSource> {
-        UserTokenLocalDataSourceImp(androidContext())
-    }
+    single<UserTokenLocalDataSource> { UserTokenLocalDataSourceImp(androidContext()) }
 }
