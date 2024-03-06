@@ -1,6 +1,7 @@
 package me.androidbox.busbytravelmate
 
 import android.app.Application
+import me.androidbox.busbytravelmate.di.userModule
 import me.androidbox.data.BuildConfig
 import me.androidbox.di.networkModule
 import me.androidbox.di.repositoryModule
@@ -22,7 +23,12 @@ class BusbyTravelMateApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@BusbyTravelMateApplication)
-            modules(networkModule, repositoryModule, useCaseModule)
+            modules(
+                networkModule,
+                repositoryModule,
+                useCaseModule,
+                userModule
+            )
         }
     }
 }

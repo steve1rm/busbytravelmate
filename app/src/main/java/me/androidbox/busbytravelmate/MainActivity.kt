@@ -3,6 +3,7 @@ package me.androidbox.busbytravelmate
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,14 +16,20 @@ import kotlinx.coroutines.launch
 import me.androidbox.busbytravelmate.mappers.toUserTokenRequestModel
 import me.androidbox.busbytravelmate.model.UserTokenRequest
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
+import me.androidbox.busbytravelmate.userTokenRepository.viewmodels.UserRepositoryViewModel
 import me.androidbox.repository.userTokenRepository.usecases.GetUserTokenUseCase
 import me.androidbox.repository.userTokenRepository.usecases.RequestUserTokenUseCase
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class MainActivity : ComponentActivity() {
+/*
     private val requestUserTokenUseCase by inject<RequestUserTokenUseCase>()
     private val getUserTokenUseCase by inject<GetUserTokenUseCase>()
+*/
+
+    private val userRepositoryViewModel by viewModel<UserRepositoryViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +42,9 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Greeting("Android")
-                    lifecycleScope.launch {
+                    userRepositoryViewModel.requestUserToken()
+
+                    /*lifecycleScope.launch {
                         requestUserTokenUseCase
                             .execute(
                                 UserTokenRequest(
@@ -50,7 +59,7 @@ class MainActivity : ComponentActivity() {
                                 Timber.d(getUserTokenUseCase.execute())
                             }
                             .onFailure { Timber.e(it.message) }
-                    }
+                    }*/
                 }
             }
         }
