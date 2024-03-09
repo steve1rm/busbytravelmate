@@ -1,5 +1,6 @@
 package me.androidbox.data.repository.userTokenRepository
 
+import kotlinx.coroutines.delay
 import me.androidbox.APIResponse
 import me.androidbox.data.local.UserTokenLocalDataSource
 import me.androidbox.data.remote.service.UserTokenRemoteDataSource
@@ -8,6 +9,7 @@ import me.androidbox.mappers.toUserTokenRequestDto
 import me.androidbox.model.UserTokenModel
 import me.androidbox.model.UserTokenRequestModel
 import me.androidbox.repository.userTokenRepository.UserTokenRepository
+import timber.log.Timber
 
 class UserTokenRepositoryImp(
     private val userTokenLocalDataSource: UserTokenLocalDataSource,
@@ -17,6 +19,8 @@ class UserTokenRepositoryImp(
     override suspend fun requestUserToken(
         userTokenRequestModel: UserTokenRequestModel
     ): APIResponse<UserTokenModel> {
+        Timber.d("====== Waiting 5 seconds to get the user token")
+        delay(5000)
         val apiResponse =
             userTokenRemoteDataSource.requestUserToken(
                 userTokenRequestModel.toUserTokenRequestDto()
