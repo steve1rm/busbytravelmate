@@ -10,6 +10,7 @@ import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEven
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
 import me.androidbox.repository.userValidationRepository.usecases.GetUserTokenUseCase
 import me.androidbox.repository.userValidationRepository.usecases.LoginUserWithEmailAndPasswordUseCase
+import me.androidbox.repository.userValidationRepository.usecases.LogoutUseCase
 import me.androidbox.repository.userValidationRepository.usecases.RegisterUserWithEmailAndPasswordUseCase
 import me.androidbox.repository.userValidationRepository.usecases.RequestUserTokenUseCase
 import timber.log.Timber
@@ -19,6 +20,7 @@ class UserValidationViewModel(
     private val getUserTokenUseCase: GetUserTokenUseCase,
     private val registerUserWithEmailAndPasswordUseCase: RegisterUserWithEmailAndPasswordUseCase,
     private val loginUserWithEmailAndPasswordUseCase: LoginUserWithEmailAndPasswordUseCase,
+    private val logoutUseCase: LogoutUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -49,15 +51,21 @@ class UserValidationViewModel(
         }
     }
 
-    fun loginClicked() {
+    fun register() {
+        viewModelScope.launch {
+            registerUserWithEmailAndPasswordUseCase.execute("test1@mail.com", "123456")
+        }
+    }
+
+    fun login() {
         viewModelScope.launch {
             loginUserWithEmailAndPasswordUseCase.execute("test1@mail.com", "123456")
         }
     }
 
-    fun register() {
+    fun logout() {
         viewModelScope.launch {
-            registerUserWithEmailAndPasswordUseCase.execute("test1@mail.com", "123456")
+            logoutUseCase.execute()
         }
     }
 

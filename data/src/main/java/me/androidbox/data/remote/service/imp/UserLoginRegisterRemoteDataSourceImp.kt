@@ -50,14 +50,14 @@ class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAut
         }
     }
 
-    override suspend fun logout(): APIResponse<String>? {
+    override suspend fun logout(): APIResponse<Unit> {
         if(firebaseAuth.currentUser == null) {
-            return APIResponse.Success("User is already logged out")
+            return APIResponse.Success(Unit)
         }
 
         return suspendCoroutine { continuation ->
             firebaseAuth.signOut()
-            continuation.resume(APIResponse.Success("User has been logged out"))
+            continuation.resume(APIResponse.Success(Unit))
         }
     }
 }
