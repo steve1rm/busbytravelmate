@@ -1,6 +1,6 @@
 [versions]
 agp = "8.3.0-alpha18"
-koinVersion = "3.2.0"
+koinVersion = "3.5.3"
 kotlin = "1.9.0"
 coreKtx = "1.12.0"
 junit = "4.13.2"
@@ -88,5 +88,5 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationVersion" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmtVersion" }
-
+kotlinxParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "serializationVersion" }
 
