@@ -9,12 +9,16 @@ import me.androidbox.busbytravelmate.model.UserTokenRequest
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
 import me.androidbox.repository.userValidationRepository.usecases.GetUserTokenUseCase
+import me.androidbox.repository.userValidationRepository.usecases.LoginUserWithEmailAndPasswordUseCase
+import me.androidbox.repository.userValidationRepository.usecases.RegisterUserWithEmailAndPasswordUseCase
 import me.androidbox.repository.userValidationRepository.usecases.RequestUserTokenUseCase
 import timber.log.Timber
 
 class UserValidationViewModel(
     private val requestUserTokenUseCase: RequestUserTokenUseCase,
     private val getUserTokenUseCase: GetUserTokenUseCase,
+    private val registerUserWithEmailAndPasswordUseCase: RegisterUserWithEmailAndPasswordUseCase,
+    private val loginUserWithEmailAndPasswordUseCase: LoginUserWithEmailAndPasswordUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -47,7 +51,13 @@ class UserValidationViewModel(
 
     fun loginClicked() {
         viewModelScope.launch {
+            loginUserWithEmailAndPasswordUseCase.execute("test@mail.com", "123456")
+        }
+    }
 
+    fun register() {
+        viewModelScope.launch {
+            registerUserWithEmailAndPasswordUseCase.execute("test@mail.com", "123456")
         }
     }
 

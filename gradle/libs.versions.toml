@@ -22,6 +22,8 @@ coroutinesTest = "1.8.0"
 securityCryptoVersion = "1.0.0"
 timberVersion = "5.0.1"
 lifecycleRuntimeComposeVersion = "2.7.0"
+googleServices = "4.4.1"
+firebaseAuth = "22.3.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -68,6 +70,7 @@ koin-test-junit4 = { module = "io.insert-koin:koin-test-junit4", version.ref = "
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorVersion" }
 coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest"}
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 
 [bundles]
 ktor = [
@@ -89,4 +92,5 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmtVersion" }
 kotlinxParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "serializationVersion" }
+googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 

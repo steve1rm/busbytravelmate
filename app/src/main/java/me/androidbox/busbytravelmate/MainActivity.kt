@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Text(text = "Hello [ ${userValidationState.userToken} ]", modifier = Modifier.clickable {
-                      //  userRepositoryViewModel.requestUserToken()
+                        userRepositoryViewModel.loginClicked()
                     })
                 }
             }

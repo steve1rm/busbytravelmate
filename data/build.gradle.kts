@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
- }
+    alias(libs.plugins.googleServices)
+}
 
 android {
     namespace = "me.androidbox.data"
@@ -53,6 +54,7 @@ dependencies {
     implementation(libs.koin.android)
 
     implementation(libs.securityCrypto)
+    implementation(libs.firebase.auth)
 
     testImplementation(libs.junit)
     testImplementation(libs.koin.test.junit4)

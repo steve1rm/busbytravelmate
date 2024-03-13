@@ -1,6 +1,7 @@
 package me.androidbox.busbytravelmate
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import me.androidbox.busbytravelmate.di.userModule
 import me.androidbox.data.BuildConfig
 import me.androidbox.di.networkModule
@@ -19,6 +20,8 @@ class BusbyTravelMateApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+
+        FirebaseApp.initializeApp(this@BusbyTravelMateApplication)
 
         startKoin {
             androidLogger()
