@@ -1,18 +1,17 @@
 package me.androidbox.data.remote.service.imp
 
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import me.androidbox.APIResponse
 import me.androidbox.data.remote.service.UserLoginRegisterRemoteDataSource
+import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class UserLoginRegisterRemoteDataSourceImp : UserLoginRegisterRemoteDataSource {
-    private var firebaseAuth: FirebaseAuth = Firebase.auth
+class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAuth) : UserLoginRegisterRemoteDataSource {
 
-    override suspend fun loginUser(email: String, password: String): APIResponse<String?> {
+    override suspend fun registerUser(email: String, password: String): APIResponse<String?> {
         firebaseAuth.currentUser?.let {
+            Timber.d("User is already registered ${firebaseAuth.currentUser?.uid}")
             return APIResponse.Success(it.uid)
         }
 
@@ -20,30 +19,45 @@ class UserLoginRegisterRemoteDataSourceImp : UserLoginRegisterRemoteDataSource {
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        Timber.d("User has been created ${firebaseAuth.currentUser?.uid}")
                         continuation.resume(APIResponse.Success(firebaseAuth.currentUser?.uid))
                     }
                     else {
+                        Timber.d("Error when creating ${firebaseAuth.currentUser?.uid}")
+                        APIResponse.Failure(task.exception ?: Exception("Unknown error - when registering"))
+                    }
+                }
+        }
+    }
+    override suspend fun loginUser(email: String, password: String): APIResponse<String?> {
+        firebaseAuth.currentUser?.let {
+            Timber.d("User is already logged in ${firebaseAuth.currentUser?.uid}")
+            return APIResponse.Success(it.uid)
+        }
+
+        return suspendCoroutine { continuation ->
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Timber.d("User has been logged in ${firebaseAuth.currentUser?.uid}")
+                        continuation.resume(APIResponse.Success(firebaseAuth.currentUser?.uid))
+                    }
+                    else {
+                        Timber.e(task.exception, "Error when logging in ${task.exception?.message}")
                         APIResponse.Failure(task.exception ?: Exception("Unknown error - when logging in"))
                     }
                 }
         }
     }
 
-    override suspend fun registerUser(email: String, password: String): APIResponse<String?> {
-        firebaseAuth.currentUser?.let {
-            return APIResponse.Success(it.uid)
+    override suspend fun logout(): APIResponse<String>? {
+        if(firebaseAuth.currentUser == null) {
+            return APIResponse.Success("User is already logged out")
         }
 
         return suspendCoroutine { continuation ->
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        continuation.resume(APIResponse.Success(firebaseAuth.currentUser?.uid))
-                    }
-                    else {
-                        APIResponse.Failure(task.exception ?: Exception("Unknown error - when registering"))
-                    }
-                }
+            firebaseAuth.signOut()
+            continuation.resume(APIResponse.Success("User has been logged out"))
         }
     }
 }

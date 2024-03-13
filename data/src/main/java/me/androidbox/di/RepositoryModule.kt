@@ -1,6 +1,6 @@
 package me.androidbox.di
 
-import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import me.androidbox.data.local.UserTokenLocalDataSource
 import me.androidbox.data.local.imp.UserTokenLocalDataSourceImp
 import me.androidbox.data.remote.service.UserLoginRegisterRemoteDataSource
@@ -23,6 +23,6 @@ val repositoryModule = module {
     single<UserTokenLocalDataSource> { UserTokenLocalDataSourceImp(androidContext()) }
 
     single<UserLoginRegisterRemoteDataSource> {
-        UserLoginRegisterRemoteDataSourceImp()
+        UserLoginRegisterRemoteDataSourceImp(this.get<FirebaseAuth>())
     }
 }

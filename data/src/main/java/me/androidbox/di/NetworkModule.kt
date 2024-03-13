@@ -1,5 +1,8 @@
 package me.androidbox.di
 
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -35,5 +38,9 @@ val networkModule = module {
 
     factory<me.androidbox.data.remote.service.UserTokenRemoteDataSource> {
         UserTokenRemoteDataSourceImp(this.get<HttpClient>())
+    }
+
+    single<FirebaseAuth> {
+        Firebase.auth
     }
 }

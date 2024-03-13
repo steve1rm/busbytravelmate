@@ -28,8 +28,7 @@ class UserTokenRemoteDataSourceImpTest {
     private fun createMockEngine(content: String): HttpClient {
         val mockEngine = MockEngine {
             this.respond(
-                content =
-                    content, // kotlinx.serialization.json.Json.encodeToString(TokenResponse(accessToken = "example_token")),
+                content = content,
                 status = HttpStatusCode.OK,
                 headers = headersOf(HttpHeaders.ContentType, Json.toString())
             )

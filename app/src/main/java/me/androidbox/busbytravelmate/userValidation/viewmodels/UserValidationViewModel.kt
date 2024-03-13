@@ -51,13 +51,13 @@ class UserValidationViewModel(
 
     fun loginClicked() {
         viewModelScope.launch {
-            loginUserWithEmailAndPasswordUseCase.execute("test@mail.com", "123456")
+            loginUserWithEmailAndPasswordUseCase.execute("test1@mail.com", "123456")
         }
     }
 
     fun register() {
         viewModelScope.launch {
-            registerUserWithEmailAndPasswordUseCase.execute("test@mail.com", "123456")
+            registerUserWithEmailAndPasswordUseCase.execute("test1@mail.com", "123456")
         }
     }
 
