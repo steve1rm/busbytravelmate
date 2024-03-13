@@ -1,4 +1,4 @@
-package me.androidbox.repository.userTokenRepository.usecases
+package me.androidbox.repository.userValidationRepository.usecases
 
 fun interface SaveUserTokenUseCase {
     suspend fun execute(userToken: String)

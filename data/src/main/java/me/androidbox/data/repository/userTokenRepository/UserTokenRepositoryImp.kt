@@ -7,12 +7,12 @@ import me.androidbox.mappers.toUserTokenModel
 import me.androidbox.mappers.toUserTokenRequestDto
 import me.androidbox.model.UserTokenModel
 import me.androidbox.model.UserTokenRequestModel
-import me.androidbox.repository.userTokenRepository.UserTokenRepository
+import me.androidbox.repository.userValidationRepository.UserValidationRepository
 
 class UserTokenRepositoryImp(
     private val userTokenLocalDataSource: UserTokenLocalDataSource,
     private val userTokenRemoteDataSource: UserTokenRemoteDataSource
-) : UserTokenRepository {
+) : UserValidationRepository {
 
     override suspend fun requestUserToken(
         userTokenRequestModel: UserTokenRequestModel
@@ -30,6 +30,8 @@ class UserTokenRepositoryImp(
             is APIResponse.Failure -> {
                 APIResponse.Failure(apiResponse.error)
             }
+
+            APIResponse.IsLoading -> TODO()
         }
     }
 
@@ -39,5 +41,9 @@ class UserTokenRepositoryImp(
 
     override suspend fun fetchUserToken(): String? {
         return userTokenLocalDataSource.fetchUserToken()
+    }
+
+    override suspend fun loginUser(email: String, password: String): APIResponse<String> {
+        TODO("Not yet implemented")
     }
 }

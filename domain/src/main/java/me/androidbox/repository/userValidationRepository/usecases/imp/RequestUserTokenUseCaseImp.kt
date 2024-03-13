@@ -1,12 +1,12 @@
-package me.androidbox.repository.userTokenRepository.usecases.imp
+package me.androidbox.repository.userValidationRepository.usecases.imp
 
 import me.androidbox.APIResponse
 import me.androidbox.model.UserTokenModel
 import me.androidbox.model.UserTokenRequestModel
-import me.androidbox.repository.userTokenRepository.UserTokenRepository
-import me.androidbox.repository.userTokenRepository.usecases.RequestUserTokenUseCase
+import me.androidbox.repository.userValidationRepository.UserValidationRepository
+import me.androidbox.repository.userValidationRepository.usecases.RequestUserTokenUseCase
 
-class RequestUserTokenUseCaseImp(private val userTokenRepository: UserTokenRepository) :
+class RequestUserTokenUseCaseImp(private val userTokenRepository: UserValidationRepository) :
     RequestUserTokenUseCase {
     override suspend fun execute(
         userTokenRequestModel: UserTokenRequestModel
