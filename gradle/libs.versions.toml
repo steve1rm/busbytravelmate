@@ -24,6 +24,8 @@ timberVersion = "5.0.1"
 lifecycleRuntimeComposeVersion = "2.7.0"
 googleServices = "4.4.1"
 firebaseAuth = "22.3.1"
+material3Android = "1.2.1"
+uiTooling = "1.6.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -71,6 +73,8 @@ ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktorVer
 coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutinesTest"}
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [bundles]
 ktor = [
