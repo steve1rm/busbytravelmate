@@ -10,3 +10,4 @@ Travel and hotels finder app
 - [x] kotlin coroutines
 - [x] MVVM
 - [x] Material design 3
+- [x] Firebase authentication
