@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.conventionalCommits)
     alias(libs.plugins.serialization)
     alias(libs.plugins.kotlinxParcelize)
+    alias(libs.plugins.googleServices)
 }
 
 android {
@@ -80,6 +81,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.timber)
     implementation(libs.koin.android)
+    implementation(libs.firebase.auth)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

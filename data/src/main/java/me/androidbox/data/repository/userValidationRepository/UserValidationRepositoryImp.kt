@@ -1,7 +1,8 @@
-package me.androidbox.data.repository.userTokenRepository
+package me.androidbox.data.repository.userValidationRepository
 
 import me.androidbox.APIResponse
 import me.androidbox.data.local.UserTokenLocalDataSource
+import me.androidbox.data.remote.service.UserLoginRegisterRemoteDataSource
 import me.androidbox.data.remote.service.UserTokenRemoteDataSource
 import me.androidbox.mappers.toUserTokenModel
 import me.androidbox.mappers.toUserTokenRequestDto
@@ -9,9 +10,10 @@ import me.androidbox.model.UserTokenModel
 import me.androidbox.model.UserTokenRequestModel
 import me.androidbox.repository.userValidationRepository.UserValidationRepository
 
-class UserTokenRepositoryImp(
+class UserValidationRepositoryImp(
     private val userTokenLocalDataSource: UserTokenLocalDataSource,
-    private val userTokenRemoteDataSource: UserTokenRemoteDataSource
+    private val userTokenRemoteDataSource: UserTokenRemoteDataSource,
+    private val userLoginRegisterRemoteDataSource: UserLoginRegisterRemoteDataSource
 ) : UserValidationRepository {
 
     override suspend fun requestUserToken(
@@ -43,7 +45,11 @@ class UserTokenRepositoryImp(
         return userTokenLocalDataSource.fetchUserToken()
     }
 
-    override suspend fun loginUser(email: String, password: String): APIResponse<String> {
-        TODO("Not yet implemented")
+    override suspend fun loginUser(email: String, password: String): APIResponse<String?> {
+        return userLoginRegisterRemoteDataSource.loginUser(email, password)
+    }
+
+    override suspend fun registerUser(email: String, password: String): APIResponse<String?> {
+        return userLoginRegisterRemoteDataSource.registerUser(email, password)
     }
 }
