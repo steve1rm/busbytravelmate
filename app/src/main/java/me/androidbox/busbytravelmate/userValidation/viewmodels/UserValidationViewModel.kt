@@ -1,20 +1,15 @@
 package me.androidbox.busbytravelmate.userValidation.viewmodels
 
-import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import me.androidbox.APIResponse
 import me.androidbox.busbytravelmate.mappers.toUserTokenRequestModel
 import me.androidbox.busbytravelmate.model.UserTokenRequest
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
-import me.androidbox.repository.userTokenRepository.usecases.GetUserTokenUseCase
-import me.androidbox.repository.userTokenRepository.usecases.RequestUserTokenUseCase
+import me.androidbox.repository.userValidationRepository.usecases.GetUserTokenUseCase
+import me.androidbox.repository.userValidationRepository.usecases.RequestUserTokenUseCase
 import timber.log.Timber
 
 class UserValidationViewModel(
@@ -23,9 +18,7 @@ class UserValidationViewModel(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
- //   private val _userValidationState = MutableStateFlow(UserValidationState())
-    val userValidationState = savedStateHandle.getStateFlow("userValidationState", UserValidationState())
-    val userTokenState = savedStateHandle.getStateFlow("userToken", "")
+     val userValidationState = savedStateHandle.getStateFlow("userValidationState", UserValidationState<Unit>())
 
     fun validationEvents(userValidationEvents: UserValidationEvents) {
         when(userValidationEvents) {
@@ -33,7 +26,6 @@ class UserValidationViewModel(
                 savedStateHandle["userValidationState"] =
                     userValidationState.value.copy(userToken = userValidationEvents.userToken)
 
-                savedStateHandle["userToken"] = userValidationEvents.userToken
             }
 
             is UserValidationEvents.OnEmailChanged -> {
@@ -44,10 +36,18 @@ class UserValidationViewModel(
                     userValidationState.copy(isLoading = userValidationEvents.isLoading)
                 }*/
             }
-            UserValidationEvents.OnLoginClicked -> TODO()
+            UserValidationEvents.OnLoginClicked -> {
+                TODO()
+            }
             is UserValidationEvents.OnPasswordChanged -> TODO()
             is UserValidationEvents.OnPasswordVisibilityChanged -> TODO()
             UserValidationEvents.OnSignUpClicked -> TODO()
+        }
+    }
+
+    fun loginClicked() {
+        viewModelScope.launch {
+
         }
     }
 

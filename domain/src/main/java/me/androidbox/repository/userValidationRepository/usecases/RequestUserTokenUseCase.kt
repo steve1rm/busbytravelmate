@@ -1,4 +1,4 @@
-package me.androidbox.repository.userTokenRepository.usecases
+package me.androidbox.repository.userValidationRepository.usecases
 
 import me.androidbox.APIResponse
 import me.androidbox.model.UserTokenModel

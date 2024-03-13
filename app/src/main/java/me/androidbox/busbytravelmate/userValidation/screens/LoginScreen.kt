@@ -10,7 +10,7 @@ import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationStat
 
 @Composable
 fun LoginScreen(
-    userValidationState: UserValidationState,
+    userValidationState: UserValidationState<Unit>,
     userValidationEvents: (event: UserValidationEvents) -> Unit
 ) {
     Text(text = "Login User")

@@ -6,7 +6,7 @@ import kotlinx.parcelize.RawValue
 import me.androidbox.APIResponse
 
 @Parcelize
-data class UserValidationState(
+data class UserValidationState<T>(
     val email: String = "",
     val password: String = "",
     val isPasswordVisible: Boolean = false,
@@ -15,5 +15,5 @@ data class UserValidationState(
     val isValidPassword: Boolean = false,
     val isLoading: Boolean = false,
     val userToken: String = "",
-    val apiResponse: @RawValue APIResponse<Any>? = null
+    val apiResponse: @RawValue APIResponse<T>? = null
 ) : Parcelable
