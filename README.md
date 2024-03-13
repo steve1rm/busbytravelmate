@@ -1,4 +1,4 @@
-# busbytravelmate
+# Busby Travel Mate
 Travel and hotels finder app
 
 - [x] Jetpack Compose
@@ -11,3 +11,4 @@ Travel and hotels finder app
 - [x] MVVM
 - [x] Material design 3
 - [x] Firebase authentication
+- [x] Amadeus rest API
