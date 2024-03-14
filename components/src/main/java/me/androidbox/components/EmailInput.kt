@@ -23,25 +23,24 @@ import androidx.compose.ui.tooling.preview.Preview
 fun EmailInput(
     modifier: Modifier = Modifier,
     label: String,
-    icon: ImageVector,
     currentValue: String,
+    icon: ImageVector,
     keyboardActions: KeyboardActions,
     focusRequester: FocusRequester? = null,
-    onValueChange: (String) -> Unit,
-) {
+    onValueChange: (String) -> Unit) {
     TextField(
         modifier = modifier
             .focusRequester(focusRequester ?: FocusRequester()),
         value = currentValue,
         onValueChange = onValueChange,
+        label = {
+            Text(text = label)
+        },
         leadingIcon = {
             Icon(
                 imageVector = icon,
                 contentDescription = label
             )
-        },
-        label = {
-            Text(text = label)
         },
         singleLine = true,
         shape = ShapeDefaults.Medium,
@@ -52,7 +51,6 @@ fun EmailInput(
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Next
         )
-
     )
 }
 
