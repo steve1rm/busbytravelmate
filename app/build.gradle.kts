@@ -68,6 +68,7 @@ conventionalCommits {
 dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":components"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

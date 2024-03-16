@@ -28,7 +28,7 @@ fun CredentialInput(
         EmailInput(
             modifier = Modifier.fillMaxWidth(),
             label = "Email",
-            currentValue = "steve@@gmail.com",
+            currentValue = "steve@gmail.com",
             icon = Icons.Default.Email,
             keyboardActions = KeyboardActions.Default
         ) {

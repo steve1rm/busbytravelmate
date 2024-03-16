@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import me.androidbox.busbytravelmate.screens.LoginScreen
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
 import me.androidbox.busbytravelmate.userValidation.viewmodels.UserValidationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,9 +36,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Text(text = "Hello [ ${userValidationState.userToken} ]", modifier = Modifier.clickable {
+                    LoginScreen(modifier = Modifier.fillMaxSize())
+
+                    /*Text(text = "Hello [ ${userValidationState.userToken} ]", modifier = Modifier.clickable {
                         userRepositoryViewModel.login()
-                    })
+                    })*/
                 }
             }
         }
