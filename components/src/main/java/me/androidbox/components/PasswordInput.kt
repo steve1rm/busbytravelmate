@@ -33,7 +33,7 @@ fun PasswordInput(
     modifier: Modifier = Modifier,
     label: String,
     currentValue: String,
-    leadingIcon: ImageVector,
+    leadingIcon: ImageVector = Icons.Default.Lock,
     isPasswordVisible: Boolean,
     visibilityIcon: ImageVector = Icons.Default.Visibility,
     visibilityOffIcon: ImageVector = Icons.Default.VisibilityOff,
