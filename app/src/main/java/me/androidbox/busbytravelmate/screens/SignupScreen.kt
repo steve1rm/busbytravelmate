@@ -15,9 +15,7 @@ import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
 import me.androidbox.components.CredentialInput
 
 @Composable
-fun LoginScreen(
-    modifier: Modifier = Modifier,
-) {
+fun SignupScreen(modifier: Modifier = Modifier,) {
     Box(
         modifier = modifier.padding(top = 100.dp, start = 16.dp, end = 16.dp, bottom = 30.dp),
     ) {
@@ -29,7 +27,7 @@ fun LoginScreen(
 
         CredentialInput(
             modifier = Modifier.align(Alignment.Center),
-            actionButtonName = "Login",
+            actionButtonName = "Sign up",
             onEmailChanged = { /*TODO*/ },
             onPasswordChanged = { /*TODO*/ },
             onVisibilityChanged = { /*TODO*/ },
@@ -44,11 +42,9 @@ fun LoginScreen(
 }
 
 @Composable
-@Preview(
-    showBackground = true,
-    showSystemUi = true)
-fun PreviewLoginScreen() {
+@Preview
+fun LoginScreen() {
     BusbyTravelMateTheme {
-        LoginScreen()
+        SignupScreen()
     }
 }

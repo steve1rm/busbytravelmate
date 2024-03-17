@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CredentialInput(
     modifier: Modifier = Modifier,
+    actionButtonName: String,
     onEmailChanged: (email: String) -> Unit,
     onPasswordChanged: (password: String) -> Unit,
     onVisibilityChanged: () -> Unit,
@@ -50,7 +51,7 @@ fun CredentialInput(
 
         ActionButton(
             modifier = Modifier.fillMaxWidth(),
-            label = "Login") {
+            label = actionButtonName) {
             onActionClicked()
         }
     }
@@ -60,6 +61,7 @@ fun CredentialInput(
 @Preview
 fun PreviewCredentialInput() {
     CredentialInput(
+        actionButtonName = "Login",
         onVisibilityChanged = {},
         onPasswordChanged = {},
         onEmailChanged = {},
