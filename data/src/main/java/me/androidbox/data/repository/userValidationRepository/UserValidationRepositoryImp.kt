@@ -52,4 +52,8 @@ class UserValidationRepositoryImp(
     override suspend fun registerUser(email: String, password: String): APIResponse<String?> {
         return userLoginRegisterRemoteDataSource.registerUser(email, password)
     }
+
+    override suspend fun logout(): APIResponse<Unit> {
+        return userLoginRegisterRemoteDataSource.logout()
+    }
 }
