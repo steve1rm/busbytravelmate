@@ -34,6 +34,7 @@ class UserValidationRepositoryImp(
             }
 
             APIResponse.IsLoading -> TODO()
+            APIResponse.Idle -> TODO()
         }
     }
 

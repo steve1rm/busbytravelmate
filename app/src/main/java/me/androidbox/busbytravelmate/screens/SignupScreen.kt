@@ -12,10 +12,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.androidbox.busbytravelmate.R
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
+import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
+import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
 import me.androidbox.components.CredentialInput
 
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier,) {
+fun SignupScreen(
+    modifier: Modifier = Modifier,
+    userValidationState: UserValidationState<Unit>,
+    userValidationEvents: (userValidationEvent: UserValidationEvents) -> Unit,
+) {
     Box(
         modifier = modifier.padding(top = 100.dp, start = 16.dp, end = 16.dp, bottom = 30.dp),
     ) {
@@ -27,11 +33,16 @@ fun SignupScreen(modifier: Modifier = Modifier,) {
 
         CredentialInput(
             modifier = Modifier.align(Alignment.Center),
+            email = userValidationState.email,
+            password = userValidationState.password,
+            isPasswordVisible = userValidationState.isPasswordVisible,
             actionButtonName = "Sign up",
             onEmailChanged = { /*TODO*/ },
             onPasswordChanged = { /*TODO*/ },
             onVisibilityChanged = { /*TODO*/ },
-            onActionClicked = { /*TODO*/ })
+            onActionClicked = { _, _ ->
+
+            })
 
         Text(
             modifier = Modifier
@@ -43,8 +54,8 @@ fun SignupScreen(modifier: Modifier = Modifier,) {
 
 @Composable
 @Preview
-fun LoginScreen() {
+fun PreviewSignupScreen() {
     BusbyTravelMateTheme {
-        SignupScreen()
+    //    SignupScreen()
     }
 }

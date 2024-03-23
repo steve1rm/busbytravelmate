@@ -1,6 +1,7 @@
 package me.androidbox.busbytravelmate.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -12,11 +13,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.androidbox.busbytravelmate.R
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
+import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
+import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
 import me.androidbox.components.CredentialInput
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
+    userToken: String,
+    userValidationState: UserValidationState<Unit>,
+    userValidationEvents: (userValidationEvent: UserValidationEvents) -> Unit,
 ) {
     Box(
         modifier = modifier.padding(top = 100.dp, start = 16.dp, end = 16.dp, bottom = 30.dp),
@@ -29,16 +35,30 @@ fun LoginScreen(
 
         CredentialInput(
             modifier = Modifier.align(Alignment.Center),
+            email = userValidationState.email,
+            password = userValidationState.password,
+            isPasswordVisible = userValidationState.isPasswordVisible,
             actionButtonName = "Login",
-            onEmailChanged = { /*TODO*/ },
-            onPasswordChanged = { /*TODO*/ },
-            onVisibilityChanged = { /*TODO*/ },
-            onActionClicked = { /*TODO*/ })
+            onEmailChanged = { email ->
+                userValidationEvents(UserValidationEvents.OnEmailChanged(email))
+            },
+            onPasswordChanged = { password ->
+                userValidationEvents(UserValidationEvents.OnPasswordChanged(password))
+            },
+            onVisibilityChanged = {
+               userValidationEvents(UserValidationEvents.OnPasswordVisibilityChanged)
+            },
+            onActionClicked = { email, password ->
+                userValidationEvents(UserValidationEvents.OnLoginClicked(email, password))
+            })
 
         Text(
             modifier = Modifier
-                .align(Alignment.BottomCenter),
-            text = "Don't have account? Signup"
+                .align(Alignment.BottomCenter).
+            clickable {
+                userValidationEvents(UserValidationEvents.OnSignUpClicked)
+            },
+            text = userToken
         )
     }
 }
@@ -49,6 +69,6 @@ fun LoginScreen(
     showSystemUi = true)
 fun PreviewLoginScreen() {
     BusbyTravelMateTheme {
-        LoginScreen()
+      //  LoginScreen()
     }
 }

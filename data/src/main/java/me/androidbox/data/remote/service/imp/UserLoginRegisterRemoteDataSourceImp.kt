@@ -39,7 +39,7 @@ class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAut
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Timber.d("User has been logged in ${firebaseAuth.currentUser?.uid}")
+                        Timber.d("User has been logged in [$email, $password] ${firebaseAuth.currentUser?.uid}")
                         continuation.resume(APIResponse.Success(firebaseAuth.currentUser?.uid))
                     }
                     else {
