@@ -51,6 +51,7 @@ class UserValidationViewModel(
             }
             is UserValidationEvents.OnPasswordVisibilityChanged -> {
                 val isVisible = !userValidationState.value.isPasswordVisible
+
                 savedStateHandle[USER_VALIDATION_STATE] =
                     userValidationState.value.copy(isPasswordVisible = isVisible)
             }

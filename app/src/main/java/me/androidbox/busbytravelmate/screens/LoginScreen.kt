@@ -16,11 +16,13 @@ import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
 import me.androidbox.components.CredentialInput
+import java.util.UUID
 
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
     userToken: String,
+    onSignUpClicked: () -> Unit,
     userValidationState: UserValidationState<Unit>,
     userValidationEvents: (userValidationEvent: UserValidationEvents) -> Unit,
 ) {
@@ -32,6 +34,7 @@ fun LoginScreen(
                 .align(Alignment.TopCenter),
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = "Logo")
+
 
         CredentialInput(
             modifier = Modifier.align(Alignment.Center),
@@ -56,9 +59,9 @@ fun LoginScreen(
             modifier = Modifier
                 .align(Alignment.BottomCenter).
             clickable {
-                userValidationEvents(UserValidationEvents.OnSignUpClicked)
+                onSignUpClicked()
             },
-            text = userToken
+            text = "Don't have an account, sign up"
         )
     }
 }
@@ -69,6 +72,14 @@ fun LoginScreen(
     showSystemUi = true)
 fun PreviewLoginScreen() {
     BusbyTravelMateTheme {
-      //  LoginScreen()
+        LoginScreen(
+        userToken = UUID.randomUUID().toString(),
+        onSignUpClicked = {
+
+        },
+        userValidationState = UserValidationState(),
+        userValidationEvents = {
+
+        },)
     }
 }
