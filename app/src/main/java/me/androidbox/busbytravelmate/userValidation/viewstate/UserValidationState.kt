@@ -13,7 +13,10 @@ data class UserValidationState<T>(
     val username: String = "",
     val isValidEmail: Boolean = false,
     val isValidPassword: Boolean = false,
-    val isLoading: Boolean = false,
+    val isLoading: Boolean? = null,
     val userToken: String = "",
+    val isLoginSuccess: Boolean = false,
+    val errorMessage: String = "",
+    /** Raw value needed for parcelize to work on a complex object */
     val apiResponse: @RawValue APIResponse<T>? = null
 ) : Parcelable

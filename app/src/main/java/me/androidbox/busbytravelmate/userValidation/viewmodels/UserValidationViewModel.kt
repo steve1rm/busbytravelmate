@@ -24,50 +24,101 @@ class UserValidationViewModel(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-     val userValidationState = savedStateHandle.getStateFlow("userValidationState", UserValidationState<Unit>())
+    private companion object {
+        const val USER_VALIDATION_STATE = "userValidationState"
+    }
 
-    fun validationEvents(userValidationEvents: UserValidationEvents) {
-        when(userValidationEvents) {
+    val userValidationState =
+        savedStateHandle.getStateFlow(USER_VALIDATION_STATE, UserValidationState<Unit>())
+
+    fun validationEvents(userValidationEvent: UserValidationEvents) {
+        when(userValidationEvent) {
             is UserValidationEvents.OnUserTokenRequest -> {
-                savedStateHandle["userValidationState"] =
-                    userValidationState.value.copy(userToken = userValidationEvents.userToken)
-
+                savedStateHandle[USER_VALIDATION_STATE] =
+                    userValidationState.value.copy(userToken = userValidationEvent.userToken)
             }
 
             is UserValidationEvents.OnEmailChanged -> {
-                savedStateHandle["email"] = userValidationEvents.email
+                savedStateHandle[USER_VALIDATION_STATE] =
+                    userValidationState.value.copy(email = userValidationEvent.email)
             }
             is UserValidationEvents.OnLoading -> {
-            /*    _userValidationState.update { userValidationState ->
-                    userValidationState.copy(isLoading = userValidationEvents.isLoading)
-                }*/
+                savedStateHandle[USER_VALIDATION_STATE] =
+                    userValidationState.value.copy(
+                        isLoading = userValidationEvent.isLoading == true)
             }
-            UserValidationEvents.OnLoginClicked -> {
+            is UserValidationEvents.OnPasswordChanged -> {
+                savedStateHandle[USER_VALIDATION_STATE] =
+                    userValidationState.value.copy(password = userValidationEvent.password)
+            }
+            is UserValidationEvents.OnPasswordVisibilityChanged -> {
+                val isVisible = !userValidationState.value.isPasswordVisible
+
+                savedStateHandle[USER_VALIDATION_STATE] =
+                    userValidationState.value.copy(isPasswordVisible = isVisible)
+            }
+            is UserValidationEvents.OnSignInClicked -> {
+                register(userValidationEvent.email, userValidationEvent.password)
+            }
+            is UserValidationEvents.OnLoginClicked -> {
+                validationEvents(UserValidationEvents.OnLoading(isLoading = true))
+                login(userValidationEvent.email, userValidationEvent.password)
+            }
+
+            UserValidationEvents.OnSignUpClicked -> {
                 TODO()
             }
-            is UserValidationEvents.OnPasswordChanged -> TODO()
-            is UserValidationEvents.OnPasswordVisibilityChanged -> TODO()
-            UserValidationEvents.OnSignUpClicked -> TODO()
+
+            is UserValidationEvents.OnLoginFailure -> {
+                validationEvents(UserValidationEvents.OnLoading(isLoading = false))
+                savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
+                    isLoginSuccess = false,
+                    errorMessage = userValidationEvent.errorMessage
+                )
+            }
+
+            UserValidationEvents.OnLoginSuccess -> {
+                validationEvents(UserValidationEvents.OnLoading(isLoading = false))
+                savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
+                    isLoginSuccess = true,
+                    errorMessage = ""
+                )
+            }
+
+            UserValidationEvents.OnErrorMessageSeen -> {
+                savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
+                    isLoginSuccess = false,
+                    errorMessage = "")
+            }
         }
     }
 
-    fun register() {
+    // "test1@mail.com", "123456"
+    private fun register(email: String, password: String) {
         viewModelScope.launch {
-            registerUserWithEmailAndPasswordUseCase.execute("test1@mail.com", "123456")
+            registerUserWithEmailAndPasswordUseCase.execute(email, password)
         }
     }
 
-    fun login() {
+    private fun login(email: String, password: String) {
         viewModelScope.launch {
-            loginUserWithEmailAndPasswordUseCase.execute("test1@mail.com", "123456")
+            loginUserWithEmailAndPasswordUseCase.execute(email, password)
+                .onSuccess {
+                    validationEvents(UserValidationEvents.OnLoginSuccess)
+                }
+                .onFailure {
+                    validationEvents(UserValidationEvents.OnLoginFailure(it.message ?: "Unknown"))
+                }
         }
     }
 
-    fun logout() {
+    private fun logout() {
         viewModelScope.launch {
             logoutUseCase.execute()
         }
     }
+
+
 
     fun requestUserToken() {
         viewModelScope.launch {

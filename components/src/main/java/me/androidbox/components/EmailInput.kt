@@ -27,13 +27,13 @@ fun EmailInput(
     icon: ImageVector,
     keyboardActions: KeyboardActions,
     focusRequester: FocusRequester? = null,
-    onValueChange: (String) -> Unit) {
+    onEmailChange: (String) -> Unit) {
     
     TextField(
         modifier = modifier
             .focusRequester(focusRequester ?: FocusRequester()),
         value = currentValue,
-        onValueChange = onValueChange,
+        onValueChange = onEmailChange,
         label = {
             Text(text = label)
         },
@@ -65,7 +65,7 @@ fun PreviewEmailInput() {
         currentValue = "steve@gmail.com",
         keyboardActions = KeyboardActions.Default,
         focusRequester = FocusRequester(),
-        onValueChange = {}
+        onEmailChange = {}
     )
 }
 

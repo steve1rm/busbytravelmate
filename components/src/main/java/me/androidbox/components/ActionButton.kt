@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 fun ActionButton(
     modifier: Modifier = Modifier,
     label: String,
-    isLoading: Boolean = false,
+    showLoading: Boolean = false,
     onButtonClicked: () -> Unit
 ) {
 
@@ -23,7 +23,7 @@ fun ActionButton(
         onButtonClicked()
     },
         content = {
-            if(isLoading) {
+            if(showLoading) {
                 CircularProgressIndicator(
                     color = Color.White
                 )
@@ -44,7 +44,7 @@ fun PreviewActionButtonLoading() {
     ActionButton(
         modifier = Modifier.fillMaxWidth(),
         label = "Login",
-        isLoading = true,
+        showLoading = true,
         onButtonClicked = {}
     )
 }
@@ -58,7 +58,7 @@ fun PreviewActionButton() {
     ActionButton(
         modifier = Modifier.fillMaxWidth(),
         label = "Login",
-        isLoading = false,
+        showLoading = false,
         onButtonClicked = {}
     )
 }

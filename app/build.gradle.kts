@@ -83,6 +83,8 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.koin.android)
     implementation(libs.firebase.auth)
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.koin)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

@@ -1,10 +1,12 @@
 package me.androidbox.data.remote.service.imp
 
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
 import me.androidbox.APIResponse
 import me.androidbox.data.remote.service.UserLoginRegisterRemoteDataSource
 import timber.log.Timber
 import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAuth) : UserLoginRegisterRemoteDataSource {
@@ -36,15 +38,15 @@ class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAut
         }
 
         return suspendCoroutine { continuation ->
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
+            firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Timber.d("User has been logged in ${firebaseAuth.currentUser?.uid}")
+                        Timber.d("User has been logged in [$email, $password] ${firebaseAuth.currentUser?.uid}")
                         continuation.resume(APIResponse.Success(firebaseAuth.currentUser?.uid))
                     }
                     else {
                         Timber.e(task.exception, "Error when logging in ${task.exception?.message}")
-                        APIResponse.Failure(task.exception ?: Exception("Unknown error - when logging in"))
+                        continuation.resume(APIResponse.Failure(task.exception ?: Exception("Unknown error - when logging in")))
                     }
                 }
         }
@@ -59,5 +61,9 @@ class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAut
             firebaseAuth.signOut()
             continuation.resume(APIResponse.Success(Unit))
         }
+    }
+
+    override suspend fun isLoggedIn(): APIResponse<Boolean> {
+        return APIResponse.Success(firebaseAuth.currentUser == null)
     }
 }

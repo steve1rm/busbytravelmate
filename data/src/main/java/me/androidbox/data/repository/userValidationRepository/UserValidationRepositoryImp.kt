@@ -34,6 +34,7 @@ class UserValidationRepositoryImp(
             }
 
             APIResponse.IsLoading -> TODO()
+            APIResponse.Idle -> TODO()
         }
     }
 
@@ -55,5 +56,9 @@ class UserValidationRepositoryImp(
 
     override suspend fun logout(): APIResponse<Unit> {
         return userLoginRegisterRemoteDataSource.logout()
+    }
+
+    override suspend fun isLoggedIn(): APIResponse<Boolean> {
+        return userLoginRegisterRemoteDataSource.isLoggedIn()
     }
 }
