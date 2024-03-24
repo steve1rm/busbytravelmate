@@ -15,6 +15,7 @@ data class UserValidationState<T>(
     val isValidPassword: Boolean = false,
     val isLoading: Boolean = false,
     val userToken: String = "",
+    val isLoginSuccess: Boolean = false,
     /** Raw value needed for parcelize to work on a complex object */
     val apiResponse: @RawValue APIResponse<T>? = null
 ) : Parcelable

@@ -5,6 +5,7 @@ import me.androidbox.APIResponse
 import me.androidbox.data.remote.service.UserLoginRegisterRemoteDataSource
 import timber.log.Timber
 import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAuth) : UserLoginRegisterRemoteDataSource {
@@ -44,7 +45,7 @@ class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAut
                     }
                     else {
                         Timber.e(task.exception, "Error when logging in ${task.exception?.message}")
-                        APIResponse.Failure(task.exception ?: Exception("Unknown error - when logging in"))
+                        continuation.resume(APIResponse.Failure(task.exception ?: Exception("Unknown error - when logging in")))
                     }
                 }
         }

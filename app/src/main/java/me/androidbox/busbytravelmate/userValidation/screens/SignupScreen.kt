@@ -1,7 +1,6 @@
-package me.androidbox.busbytravelmate.screens
+package me.androidbox.busbytravelmate.userValidation.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -16,13 +15,10 @@ import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
 import me.androidbox.components.CredentialInput
-import java.util.UUID
 
 @Composable
-fun LoginScreen(
+fun SignupScreen(
     modifier: Modifier = Modifier,
-    userToken: String,
-    onSignUpClicked: () -> Unit,
     userValidationState: UserValidationState<Unit>,
     userValidationEvents: (userValidationEvent: UserValidationEvents) -> Unit,
 ) {
@@ -35,51 +31,25 @@ fun LoginScreen(
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = "Logo")
 
-
         CredentialInput(
             modifier = Modifier.align(Alignment.Center),
             email = userValidationState.email,
             password = userValidationState.password,
             isPasswordVisible = userValidationState.isPasswordVisible,
-            actionButtonName = "Login",
-            onEmailChanged = { email ->
-                userValidationEvents(UserValidationEvents.OnEmailChanged(email))
-            },
-            onPasswordChanged = { password ->
-                userValidationEvents(UserValidationEvents.OnPasswordChanged(password))
-            },
-            onVisibilityChanged = {
-               userValidationEvents(UserValidationEvents.OnPasswordVisibilityChanged)
-            },
-            onActionClicked = { email, password ->
-                userValidationEvents(UserValidationEvents.OnLoginClicked(email, password))
-            })
+            actionButtonName = "Sign up",
+            onEmailChanged = { /*TODO*/ },
+            onPasswordChanged = { /*TODO*/ },
+            onVisibilityChanged = { /*TODO*/ },
+            onActionClicked = { _, _ ->
 
-        Text(
-            modifier = Modifier
-                .align(Alignment.BottomCenter).
-            clickable {
-                onSignUpClicked()
-            },
-            text = "Don't have an account, sign up"
-        )
+            })
     }
 }
 
 @Composable
-@Preview(
-    showBackground = true,
-    showSystemUi = true)
-fun PreviewLoginScreen() {
+@Preview
+fun PreviewSignupScreen() {
     BusbyTravelMateTheme {
-        LoginScreen(
-        userToken = UUID.randomUUID().toString(),
-        onSignUpClicked = {
-
-        },
-        userValidationState = UserValidationState(),
-        userValidationEvents = {
-
-        },)
+    //    SignupScreen()
     }
 }

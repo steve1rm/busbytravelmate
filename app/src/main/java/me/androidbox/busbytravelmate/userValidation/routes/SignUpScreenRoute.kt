@@ -1,9 +1,9 @@
-package me.androidbox.busbytravelmate.routes
+package me.androidbox.busbytravelmate.userValidation.routes
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
-import me.androidbox.busbytravelmate.screens.SignupScreen
+import me.androidbox.busbytravelmate.userValidation.screens.SignupScreen
 import me.androidbox.busbytravelmate.userValidation.viewmodels.UserValidationViewModel
 import org.koin.androidx.compose.koinViewModel
 

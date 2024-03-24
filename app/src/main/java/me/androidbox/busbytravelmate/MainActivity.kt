@@ -11,7 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.Navigator
-import me.androidbox.busbytravelmate.routes.LoginScreenRoute
+import me.androidbox.busbytravelmate.userValidation.routes.LoginScreenRoute
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
 import me.androidbox.busbytravelmate.userValidation.viewmodels.UserValidationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -28,7 +28,8 @@ class UserValidationViewModel(
         const val USER_VALIDATION_STATE = "userValidationState"
     }
 
-    val userValidationState = savedStateHandle.getStateFlow("userValidationState", UserValidationState<Unit>())
+    val userValidationState =
+        savedStateHandle.getStateFlow(USER_VALIDATION_STATE, UserValidationState<Unit>())
 
     fun validationEvents(userValidationEvent: UserValidationEvents) {
         when(userValidationEvent) {
@@ -65,6 +66,18 @@ class UserValidationViewModel(
             UserValidationEvents.OnSignUpClicked -> {
 
             }
+
+            UserValidationEvents.OnLoginFailure -> {
+                savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
+                    isLoginSuccess = false
+                )
+            }
+
+            UserValidationEvents.OnLoginSuccess -> {
+                savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
+                    isLoginSuccess = true
+                )
+            }
         }
     }
 
@@ -78,6 +91,14 @@ class UserValidationViewModel(
     private fun login(email: String, password: String) {
         viewModelScope.launch {
             loginUserWithEmailAndPasswordUseCase.execute(email, password)
+                .onSuccess {
+                    // Navigate to home screen
+                    validationEvents(UserValidationEvents.OnLoginSuccess)
+                }
+                .onFailure {
+                    // Show toast message
+                    validationEvents(UserValidationEvents.OnLoginFailure)
+                }
         }
     }
 

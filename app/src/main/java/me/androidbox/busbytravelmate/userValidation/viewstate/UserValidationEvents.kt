@@ -3,6 +3,8 @@ package me.androidbox.busbytravelmate.userValidation.viewstate
 sealed interface UserValidationEvents {
     data class OnUserTokenRequest(val userToken: String) : UserValidationEvents
     data class OnLoginClicked(val email: String, val password: String) : UserValidationEvents
+    data object OnLoginSuccess : UserValidationEvents
+    data object OnLoginFailure : UserValidationEvents
     data class OnSignInClicked(val email: String, val password: String) : UserValidationEvents
     data object OnSignUpClicked : UserValidationEvents
     data class OnEmailChanged(val email: String) : UserValidationEvents
