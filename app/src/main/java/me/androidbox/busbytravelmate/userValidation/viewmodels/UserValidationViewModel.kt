@@ -66,9 +66,7 @@ class UserValidationViewModel(
             }
 
             UserValidationEvents.OnSignUpClicked -> {
-                userValidationState.value.copy(
-                    errorMessage = ""
-                )
+                TODO()
             }
 
             is UserValidationEvents.OnLoginFailure -> {
@@ -76,7 +74,6 @@ class UserValidationViewModel(
                 savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
                     isLoginSuccess = false,
                     errorMessage = userValidationEvent.errorMessage
-
                 )
             }
 
@@ -107,11 +104,9 @@ class UserValidationViewModel(
         viewModelScope.launch {
             loginUserWithEmailAndPasswordUseCase.execute(email, password)
                 .onSuccess {
-                    // Navigate to home screen
                     validationEvents(UserValidationEvents.OnLoginSuccess)
                 }
                 .onFailure {
-                    // Inform user login has failed
                     validationEvents(UserValidationEvents.OnLoginFailure(it.message ?: "Unknown"))
                 }
         }
@@ -122,6 +117,8 @@ class UserValidationViewModel(
             logoutUseCase.execute()
         }
     }
+
+
 
     fun requestUserToken() {
         viewModelScope.launch {

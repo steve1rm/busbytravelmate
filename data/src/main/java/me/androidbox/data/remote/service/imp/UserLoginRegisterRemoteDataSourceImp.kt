@@ -62,4 +62,8 @@ class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAut
             continuation.resume(APIResponse.Success(Unit))
         }
     }
+
+    override suspend fun isLoggedIn(): APIResponse<Boolean> {
+        return APIResponse.Success(firebaseAuth.currentUser == null)
+    }
 }
