@@ -19,6 +19,7 @@ fun CredentialInput(
     email: String,
     password: String,
     isPasswordVisible: Boolean,
+    isLoading: Boolean = false,
     onEmailChanged: (email: String) -> Unit,
     onPasswordChanged: (password: String) -> Unit,
     onVisibilityChanged: () -> Unit,
@@ -53,9 +54,11 @@ fun CredentialInput(
 
         ActionButton(
             modifier = Modifier.fillMaxWidth(),
-            label = actionButtonName) {
-            onActionClicked(email, password)
-        }
+            label = actionButtonName,
+            showLoading = isLoading,
+            onButtonClicked = {
+                onActionClicked(email, password)
+            })
     }
 }
 

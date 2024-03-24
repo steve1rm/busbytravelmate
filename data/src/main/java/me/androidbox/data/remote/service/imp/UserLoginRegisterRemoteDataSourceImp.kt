@@ -1,6 +1,7 @@
 package me.androidbox.data.remote.service.imp
 
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
 import me.androidbox.APIResponse
 import me.androidbox.data.remote.service.UserLoginRegisterRemoteDataSource
 import timber.log.Timber
@@ -37,7 +38,7 @@ class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAut
         }
 
         return suspendCoroutine { continuation ->
-            firebaseAuth.createUserWithEmailAndPassword(email, password)
+            firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Timber.d("User has been logged in [$email, $password] ${firebaseAuth.currentUser?.uid}")

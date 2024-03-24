@@ -44,7 +44,8 @@ class UserValidationViewModel(
             }
             is UserValidationEvents.OnLoading -> {
                 savedStateHandle[USER_VALIDATION_STATE] =
-                    userValidationState.value.copy(isLoading = userValidationEvent.isLoading)
+                    userValidationState.value.copy(
+                        isLoading = userValidationEvent.isLoading == true)
             }
             is UserValidationEvents.OnPasswordChanged -> {
                 savedStateHandle[USER_VALIDATION_STATE] =
@@ -60,23 +61,37 @@ class UserValidationViewModel(
                 register(userValidationEvent.email, userValidationEvent.password)
             }
             is UserValidationEvents.OnLoginClicked -> {
+                validationEvents(UserValidationEvents.OnLoading(isLoading = true))
                 login(userValidationEvent.email, userValidationEvent.password)
             }
 
             UserValidationEvents.OnSignUpClicked -> {
-
+                userValidationState.value.copy(
+                    errorMessage = ""
+                )
             }
 
-            UserValidationEvents.OnLoginFailure -> {
+            is UserValidationEvents.OnLoginFailure -> {
+                validationEvents(UserValidationEvents.OnLoading(isLoading = false))
                 savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
-                    isLoginSuccess = false
+                    isLoginSuccess = false,
+                    errorMessage = userValidationEvent.errorMessage
+
                 )
             }
 
             UserValidationEvents.OnLoginSuccess -> {
+                validationEvents(UserValidationEvents.OnLoading(isLoading = false))
                 savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
-                    isLoginSuccess = true
+                    isLoginSuccess = true,
+                    errorMessage = ""
                 )
+            }
+
+            UserValidationEvents.OnErrorMessageSeen -> {
+                savedStateHandle[USER_VALIDATION_STATE] = userValidationState.value.copy(
+                    isLoginSuccess = false,
+                    errorMessage = "")
             }
         }
     }
@@ -96,8 +111,8 @@ class UserValidationViewModel(
                     validationEvents(UserValidationEvents.OnLoginSuccess)
                 }
                 .onFailure {
-                    // Show toast message
-                    validationEvents(UserValidationEvents.OnLoginFailure)
+                    // Inform user login has failed
+                    validationEvents(UserValidationEvents.OnLoginFailure(it.message ?: "Unknown"))
                 }
         }
     }

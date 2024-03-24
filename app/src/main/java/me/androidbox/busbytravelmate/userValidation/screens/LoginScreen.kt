@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,12 +38,33 @@ fun LoginScreen(
     userValidationEvents: (userValidationEvent: UserValidationEvents) -> Unit,
 ) {
 
-    val loginState by remember(key1 = userValidationState.isLoginSuccess) {
-        derivedStateOf {
-            userValidationState.isLoginSuccess
+    val context = LocalContext.current
+
+    DisposableEffect(key1 = userValidationState.isLoginSuccess, key2 = userValidationState.errorMessage) {
+        if (userValidationState.isLoginSuccess) {
+            // Navigate to next screen
+            onLoginSuccess()
         }
+
+        if (!userValidationState.isLoginSuccess && userValidationState.errorMessage.isNotBlank()) {
+            Toast.makeText(context, userValidationState.errorMessage, Toast.LENGTH_LONG).show()
+        }
+
+       onDispose {
+           userValidationEvents(UserValidationEvents.OnErrorMessageSeen)
+       }
     }
 
+/*    LaunchedEffect(key1 = userValidationState.isLoginSuccess, key2 = userValidationState.errorMessage) {
+        if (userValidationState.isLoginSuccess) {
+            // Navigate to next screen
+            onLoginSuccess()
+        }
+
+        if (!userValidationState.isLoginSuccess && userValidationState.errorMessage.isNotBlank()) {
+            Toast.makeText(context, userValidationState.errorMessage, Toast.LENGTH_LONG).show()
+        }
+    }*/
 
     Box(
         modifier = modifier.padding(top = 100.dp, start = 16.dp, end = 16.dp, bottom = 30.dp),
@@ -61,6 +80,7 @@ fun LoginScreen(
             email = userValidationState.email,
             password = userValidationState.password,
             isPasswordVisible = userValidationState.isPasswordVisible,
+            isLoading = userValidationState.isLoading == true,
             actionButtonName = "Login",
             onEmailChanged = { email ->
                 userValidationEvents(UserValidationEvents.OnEmailChanged(email))
@@ -72,7 +92,12 @@ fun LoginScreen(
                userValidationEvents(UserValidationEvents.OnPasswordVisibilityChanged)
             },
             onActionClicked = { email, password ->
-                userValidationEvents(UserValidationEvents.OnLoginClicked(email, password))
+                if(email.isBlank() || password.isBlank()) {
+                    userValidationEvents(UserValidationEvents.OnLoginFailure("No username or password"))
+                }
+                else {
+                    userValidationEvents(UserValidationEvents.OnLoginClicked(email, password))
+                }
             })
 
         Text(
@@ -83,13 +108,6 @@ fun LoginScreen(
                 },
             text = signupAnnotatedString()
         )
-
-        if(loginState) {
-            onLoginSuccess()
-        }
-        else {
-            Toast.makeText(LocalContext.current, "Failed to login", Toast.LENGTH_LONG).show()
-        }
     }
 }
 
@@ -101,11 +119,10 @@ private fun signupAnnotatedString(): AnnotatedString {
             this.append("Don't have an account")
         }
 
-        this.append(" ")
-
         this.withStyle(
             SpanStyle(color = Color.Blue)
         ) {
+            this.append(" ")
             this.append("Sign up")
         }
     }
