@@ -27,8 +27,8 @@ fun CredentialInput(
 ) {
     Column(
         modifier = modifier
-    )
-    {
+    ) {
+
         EmailInput(
             modifier = Modifier.fillMaxWidth(),
             label = "Email",
@@ -39,7 +39,7 @@ fun CredentialInput(
             onEmailChanged(it)
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         PasswordInput(
             modifier = Modifier.fillMaxWidth(),
@@ -50,7 +50,7 @@ fun CredentialInput(
             onValueChange = onPasswordChanged,
             onVisibilityChange = onVisibilityChanged)
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(48.dp))
 
         ActionButton(
             modifier = Modifier.fillMaxWidth(),

@@ -24,7 +24,6 @@ data class LoginScreenRoute(private val userToken: String) : Screen {
         }
 
         LoginScreen(
-            userToken = userState.value.userToken,
             userValidationState = userState.value,
             onLoginSuccess = {
                 navigator.push(HomeScreenRoute)
