@@ -21,10 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.LinearGradient
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -32,6 +30,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -39,11 +38,9 @@ fun EmailInput(
     modifier: Modifier = Modifier,
     label: String,
     currentValue: String,
-    icon: ImageVector,
+    leadingIcon: ImageVector,
     keyboardActions: KeyboardActions,
-    focusRequester: FocusRequester? = null,
     onEmailChange: (String) -> Unit) {
-
 
     BasicTextField2(
         modifier = modifier
@@ -57,7 +54,7 @@ fun EmailInput(
         value = currentValue,
         onValueChange = onEmailChange,
         lineLimits = TextFieldLineLimits.SingleLine,
-        textStyle = TextStyle(color = Color.White),
+        textStyle = TextStyle(color = Color.LightGray, fontSize = 16.sp),
         keyboardActions = keyboardActions,
         keyboardOptions = KeyboardOptions(
             capitalization = KeyboardCapitalization.None,
@@ -77,9 +74,9 @@ fun EmailInput(
                     modifier = Modifier
                 ) {
                     Icon(
-                        Icons.Default.Email,
+                        imageVector = leadingIcon,
                         contentDescription = "",
-                        Modifier
+                        modifier = Modifier
                             .padding(8.dp)
                             .size(32.dp)
                     )
@@ -114,10 +111,9 @@ fun PreviewEmailInput() {
     EmailInput(
         modifier = Modifier.fillMaxWidth(),
         label = "Email",
-        icon = Icons.Default.Email,
+        leadingIcon = Icons.Default.Email,
         currentValue = "steve@gmail.com",
         keyboardActions = KeyboardActions.Default,
-        focusRequester = FocusRequester(),
         onEmailChange = {}
     )
 }

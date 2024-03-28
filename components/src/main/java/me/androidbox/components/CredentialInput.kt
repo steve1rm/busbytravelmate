@@ -33,7 +33,7 @@ fun CredentialInput(
             modifier = Modifier.fillMaxWidth(),
             label = "Email",
             currentValue = email,
-            icon = Icons.Default.Email,
+            leadingIcon = Icons.Default.Email,
             keyboardActions = KeyboardActions.Default
         ) {
             onEmailChanged(it)
