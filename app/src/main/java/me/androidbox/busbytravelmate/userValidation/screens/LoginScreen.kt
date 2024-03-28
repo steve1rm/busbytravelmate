@@ -12,6 +12,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -27,10 +31,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import me.androidbox.busbytravelmate.R
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
@@ -89,8 +96,29 @@ fun LoginScreen(
                 painter = painterResource(id = R.drawable.email_password), contentDescription = "background image")
             
             Column(
-                modifier = Modifier.matchParentSize()
+                modifier = Modifier.matchParentSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
+                Spacer(modifier = Modifier.height(32.dp))
+
+                Text(
+                    text = "Welcome Back!",
+                    style = LocalTextStyle.current.copy(
+                        color = Color.White,
+                        fontSize = 32.sp
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "Welcome back we missed you",
+                    style = LocalTextStyle.current.copy(
+                        color = Color.Gray,
+                        fontSize = 18.sp
+                    )
+                )
 
                 Spacer(modifier = Modifier.height(32.dp))
 
@@ -99,19 +127,16 @@ fun LoginScreen(
                     actionButtonName = "Login",
                     email = userValidationState.email,
                     password = userValidationState.password,
-                    isPasswordVisible = userValidationState.isPasswordVisible,
                     onEmailChanged = { email ->
                         userValidationEvents(UserValidationEvents.OnEmailChanged(email))
                     },
                     onPasswordChanged = { password ->
                         userValidationEvents(UserValidationEvents.OnPasswordChanged(password))
                     },
-                    onVisibilityChanged = {
-                        userValidationEvents(UserValidationEvents.OnPasswordVisibilityChanged)
-                    },
                     onActionClicked = { email, password ->
                         userValidationEvents(UserValidationEvents.OnLoginClicked(email, password))
-                    })
+                    }
+                    )
             }
         }
     }

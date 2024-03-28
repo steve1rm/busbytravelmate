@@ -1,6 +1,9 @@
 package me.androidbox.busbytravelmate.userValidation.viewstate
 
 import android.os.Parcelable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import me.androidbox.APIResponse
@@ -9,7 +12,6 @@ import me.androidbox.APIResponse
 data class UserValidationState<T>(
     val email: String = "",
     val password: String = "",
-    val isPasswordVisible: Boolean = false,
     val username: String = "",
     val isValidEmail: Boolean = false,
     val isValidPassword: Boolean = false,

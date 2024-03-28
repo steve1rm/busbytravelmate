@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -18,11 +20,9 @@ fun CredentialInput(
     actionButtonName: String,
     email: String,
     password: String,
-    isPasswordVisible: Boolean,
     isLoading: Boolean = false,
     onEmailChanged: (email: String) -> Unit,
     onPasswordChanged: (password: String) -> Unit,
-    onVisibilityChanged: () -> Unit,
     onActionClicked: (email: String, password: String) -> Unit
 ) {
     Column(
@@ -45,10 +45,9 @@ fun CredentialInput(
             modifier = Modifier.fillMaxWidth(),
             label = "Password",
             currentValue = password,
-            isPasswordVisible = isPasswordVisible,
             keyboardActions = KeyboardActions.Default,
             onValueChange = onPasswordChanged,
-            onVisibilityChange = onVisibilityChanged)
+            onForgotPassword = {})
 
         Spacer(modifier = Modifier.height(48.dp))
 
@@ -69,12 +68,9 @@ fun PreviewCredentialInput() {
         actionButtonName = "Login",
         email = "email",
         password = "password",
-        isPasswordVisible = true,
-        onVisibilityChanged = {},
         onPasswordChanged = {},
         onEmailChanged = {},
         onActionClicked = { _, _ ->
-
         }
     )
 }

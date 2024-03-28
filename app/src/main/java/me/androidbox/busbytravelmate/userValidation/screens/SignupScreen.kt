@@ -3,6 +3,8 @@ package me.androidbox.busbytravelmate.userValidation.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,13 +38,11 @@ fun SignupScreen(
             modifier = Modifier.align(Alignment.Center),
             email = userValidationState.email,
             password = userValidationState.password,
-            isPasswordVisible = userValidationState.isPasswordVisible,
             actionButtonName = "Sign up",
             onEmailChanged = { /*TODO*/ },
             onPasswordChanged = { /*TODO*/ },
-            onVisibilityChanged = { /*TODO*/ },
             onActionClicked = { _, _ ->
-
+                userValidationEvents(UserValidationEvents.OnSignUpClicked)
             })
     }
 
