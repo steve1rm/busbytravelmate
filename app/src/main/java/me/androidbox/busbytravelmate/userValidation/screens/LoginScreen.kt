@@ -3,8 +3,10 @@ package me.androidbox.busbytravelmate.userValidation.screens
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +20,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +29,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -132,12 +136,43 @@ fun LoginScreen(
                     }
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(18.dp))
+
+                Row(
+                    modifier.fillMaxWidth().padding(horizontal = 32.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Spacer(modifier = Modifier
+                        .height(2.dp)
+                        .weight(0.5F)
+                        .background(brush = Brush.linearGradient(listOf(Color.Transparent, Color.DarkGray))))
+
+                    Text(
+                        modifier = Modifier.weight(1F),
+                        textAlign = TextAlign.Center,
+                        text = "Or continue with",
+                        style = LocalTextStyle.current.copy(
+                            color = Color.DarkGray,
+                            fontSize = 16.sp
+                        ))
+
+                    Spacer(modifier = Modifier
+                        .height(2.dp)
+                        .weight(0.5F)
+                        .background(brush = Brush.linearGradient(listOf(Color.DarkGray, Color.Transparent))))
+                }
+
+                Spacer(modifier = Modifier.height(6.dp))
 
                 SocialSignIn(modifier = Modifier.fillMaxWidth())
-
-                Text(text = signupAnnotatedString())
             }
+
+            Text(
+                modifier = Modifier
+                    .align(alignment = Alignment.BottomCenter)
+                    .padding(bottom = 12.dp),
+                text = signupAnnotatedString())
         }
     }
 }
@@ -145,7 +180,7 @@ fun LoginScreen(
 private fun signupAnnotatedString(): AnnotatedString {
     return buildAnnotatedString {
         this.withStyle(
-            SpanStyle(color = Color.Black)
+            SpanStyle(color = Color.DarkGray)
         ) {
             this.append("Don't have an account")
         }
