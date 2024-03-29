@@ -39,17 +39,16 @@ fun CredentialInput(
             onEmailChanged(it)
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(14.dp))
 
         PasswordInput(
             modifier = Modifier.fillMaxWidth(),
             label = "Password",
             currentValue = password,
-            keyboardActions = KeyboardActions.Default,
             onValueChange = onPasswordChanged,
             onForgotPassword = {})
 
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(12.dp))
 
         ActionButton(
             modifier = Modifier.fillMaxWidth(),

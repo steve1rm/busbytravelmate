@@ -5,14 +5,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text2.BasicSecureTextField
 import androidx.compose.foundation.text2.input.TextObfuscationMode
 import androidx.compose.material.icons.Icons
@@ -52,7 +52,6 @@ fun PasswordInput(
     leadingIcon: ImageVector = Icons.Default.Lock,
     visibilityIcon: ImageVector = Icons.Default.Visibility,
     visibilityOffIcon: ImageVector = Icons.Default.VisibilityOff,
-    keyboardActions: KeyboardActions,
     focusRequester: FocusRequester? = null,
     onValueChange: (String) -> Unit,
     onForgotPassword: () -> Unit
@@ -66,6 +65,15 @@ fun PasswordInput(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Text(
+            modifier = Modifier.align(Alignment.Start),
+            text = "Password",
+            style = LocalTextStyle.current.copy(
+                color = Color.LightGray,
+                fontSize = 14.sp))
+
+        Spacer(modifier = Modifier.height(2.dp))
 
         BasicSecureTextField(
             modifier = Modifier
@@ -137,9 +145,12 @@ fun PasswordInput(
 
         TextButton(
             onClick = onForgotPassword,
-            modifier = Modifier.align(Alignment.End)
+            modifier = Modifier
+                .align(Alignment.End),
+            contentPadding = PaddingValues(0.dp)
         ) {
             Text(
+                modifier = Modifier.padding(0.dp),
                 textAlign = TextAlign.End,
                 text = "Forgot password?",
                 style = LocalTextStyle.current.copy(
@@ -158,10 +169,6 @@ fun PreviewPasswordInput() {
         mutableStateOf("")
     }
 
-    var isVisibilityState by remember {
-        mutableStateOf(false)
-    }
-
     PasswordInput(
         modifier = Modifier.fillMaxWidth(),
         label = "Password",
@@ -170,7 +177,6 @@ fun PreviewPasswordInput() {
         onValueChange = {
             textInput = it
         },
-        keyboardActions = KeyboardActions.Default,
         onForgotPassword = {}
     )
 }

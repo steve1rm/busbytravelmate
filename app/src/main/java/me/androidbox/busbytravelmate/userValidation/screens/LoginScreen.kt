@@ -92,7 +92,7 @@ fun LoginScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
                     text = "Welcome Back!",
@@ -103,7 +103,7 @@ fun LoginScreen(
                     )
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
                     text = "Welcome back we missed you",
@@ -114,7 +114,7 @@ fun LoginScreen(
                     )
                 )
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(10.dp))
 
                 CredentialInput(
                     modifier = Modifier.padding(horizontal = 32.dp),
@@ -132,7 +132,7 @@ fun LoginScreen(
                     }
                 )
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 SocialSignIn(modifier = Modifier.fillMaxWidth())
 
