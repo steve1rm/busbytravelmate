@@ -1,13 +1,22 @@
 package me.androidbox.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun ActionButton(
@@ -16,12 +25,20 @@ fun ActionButton(
     showLoading: Boolean = false,
     onButtonClicked: () -> Unit
 ) {
-
     Button(
-        modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth()
+            .height(56.dp)
+            .background(brush = Brush.linearGradient(
+                colors = listOf(Color.Magenta, Color.Red)
+            ),
+                shape = RoundedCornerShape(16.dp)),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+        ),
         onClick = {
-        onButtonClicked()
-    },
+            onButtonClicked()
+        },
         content = {
             if(showLoading) {
                 CircularProgressIndicator(
@@ -29,7 +46,12 @@ fun ActionButton(
                 )
             }
             else {
-                Text(text = label)
+                Text(text = label,
+                    style = LocalTextStyle.current.copy(
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Medium
+                    ))
             }
         }
     )

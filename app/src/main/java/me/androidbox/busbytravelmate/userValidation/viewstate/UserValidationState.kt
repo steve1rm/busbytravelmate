@@ -1,9 +1,6 @@
 package me.androidbox.busbytravelmate.userValidation.viewstate
 
 import android.os.Parcelable
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.ui.graphics.vector.ImageVector
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import me.androidbox.APIResponse

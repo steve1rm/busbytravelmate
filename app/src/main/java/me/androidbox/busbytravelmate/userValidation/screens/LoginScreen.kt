@@ -3,7 +3,6 @@ package me.androidbox.busbytravelmate.userValidation.screens
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,28 +11,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,7 +35,7 @@ import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationEvents
 import me.androidbox.busbytravelmate.userValidation.viewstate.UserValidationState
 import me.androidbox.components.CredentialInput
-import java.util.UUID
+import me.androidbox.components.SocialSignIn
 
 @Composable
 fun LoginScreen(
@@ -106,7 +98,8 @@ fun LoginScreen(
                     text = "Welcome Back!",
                     style = LocalTextStyle.current.copy(
                         color = Color.White,
-                        fontSize = 32.sp
+                        fontSize = 40.sp,
+                        fontWeight = FontWeight.SemiBold
                     )
                 )
 
@@ -116,7 +109,8 @@ fun LoginScreen(
                     text = "Welcome back we missed you",
                     style = LocalTextStyle.current.copy(
                         color = Color.Gray,
-                        fontSize = 18.sp
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Medium
                     )
                 )
 
@@ -136,55 +130,14 @@ fun LoginScreen(
                     onActionClicked = { email, password ->
                         userValidationEvents(UserValidationEvents.OnLoginClicked(email, password))
                     }
-                    )
+                )
+
+                Spacer(modifier = Modifier.height(32.dp))
+
+                SocialSignIn(modifier = Modifier.fillMaxWidth())
             }
         }
     }
-
-/*
-    Box(
-        modifier = modifier.padding(top = 100.dp, start = 16.dp, end = 16.dp, bottom = 30.dp),
-    ) {
-        Image(
-            modifier = Modifier
-                .align(Alignment.TopCenter),
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = "Logo")
-
-        CredentialInput(
-            modifier = Modifier.align(Alignment.Center),
-            email = userValidationState.email,
-            password = userValidationState.password,
-            isPasswordVisible = userValidationState.isPasswordVisible,
-            isLoading = userValidationState.isLoading == true,
-            actionButtonName = "Login",
-            onEmailChanged = { email ->
-                userValidationEvents(UserValidationEvents.OnEmailChanged(email))
-            },
-            onPasswordChanged = { password ->
-                userValidationEvents(UserValidationEvents.OnPasswordChanged(password))
-            },
-            onVisibilityChanged = {
-               userValidationEvents(UserValidationEvents.OnPasswordVisibilityChanged)
-            },
-            onActionClicked = { email, password ->
-                if(email.isBlank() || password.isBlank()) {
-                    userValidationEvents(UserValidationEvents.OnLoginFailure("No username or password"))
-                }
-                else {
-                    userValidationEvents(UserValidationEvents.OnLoginClicked(email, password))
-                }
-            })
-
-        Text(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .clickable {
-                    onSignUpClicked()
-                },
-            text = signupAnnotatedString()
-        )
-    }*/
 }
 
 private fun signupAnnotatedString(): AnnotatedString {
