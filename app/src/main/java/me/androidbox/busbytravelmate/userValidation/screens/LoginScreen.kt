@@ -135,6 +135,8 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(32.dp))
 
                 SocialSignIn(modifier = Modifier.fillMaxWidth())
+
+                Text(text = signupAnnotatedString())
             }
         }
     }
