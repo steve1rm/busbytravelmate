@@ -9,7 +9,6 @@ import me.androidbox.APIResponse
 data class UserValidationState<T>(
     val email: String = "",
     val password: String = "",
-    val isPasswordVisible: Boolean = false,
     val username: String = "",
     val isValidEmail: Boolean = false,
     val isValidPassword: Boolean = false,
