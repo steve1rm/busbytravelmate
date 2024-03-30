@@ -36,6 +36,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -87,9 +88,10 @@ fun PasswordInput(
                     shape = RoundedCornerShape(8.dp)
                 )
                 .border(width = 0.1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
+            cursorBrush = SolidColor(Color.LightGray),
             value = currentValue,
             onValueChange = onValueChange,
-            textStyle = TextStyle(color = Color.LightGray, fontSize = 16.sp),
+            textStyle = LocalTextStyle.current.copy(color = Color.LightGray, fontSize = 20.sp),
             decorator = { textFieldDecorator ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,

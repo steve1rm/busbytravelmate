@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -75,10 +76,11 @@ fun EmailInput(
                     color = Color.LightGray,
                     shape = RoundedCornerShape(size = 8.dp)
                 ),
+            cursorBrush = SolidColor(Color.LightGray),
             value = currentValue,
             onValueChange = onEmailChange,
             lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = TextStyle(color = Color.LightGray, fontSize = 16.sp),
+            textStyle = LocalTextStyle.current.copy(color = Color.LightGray, fontSize = 20.sp),
             keyboardActions = keyboardActions,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
