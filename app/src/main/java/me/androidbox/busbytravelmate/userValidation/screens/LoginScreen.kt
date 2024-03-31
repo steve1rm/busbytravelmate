@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -146,7 +147,7 @@ fun LoginScreen(
                 ) {
                     Spacer(modifier = Modifier
                         .height(2.dp)
-                        .weight(0.5F)
+                        .weight(0.70F)
                         .background(brush = Brush.linearGradient(listOf(Color.Transparent, Color.DarkGray))))
 
                     Text(
@@ -160,7 +161,7 @@ fun LoginScreen(
 
                     Spacer(modifier = Modifier
                         .height(2.dp)
-                        .weight(0.5F)
+                        .weight(0.70F)
                         .background(brush = Brush.linearGradient(listOf(Color.DarkGray, Color.Transparent))))
                 }
 
