@@ -86,7 +86,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.koin)
-  //  implementation(libs.koin.annotations)
+    implementation(libs.koin.annotations)
     ksp(libs.koin.ksp.compiler)
 
     debugImplementation(libs.androidx.ui.tooling)
