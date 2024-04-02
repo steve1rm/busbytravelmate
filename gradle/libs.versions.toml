@@ -107,5 +107,3 @@ ktfmt = { id = "com.ncorti.ktfmt.gradle", version.ref = "ktfmtVersion" }
 kotlinxParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "serializationVersion" }
 googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion"}
-
-# id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply false

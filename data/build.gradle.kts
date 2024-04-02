@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -51,6 +52,9 @@ dependencies {
 
     implementation(libs.koin.ktor)
     implementation(libs.koin.android)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
+
 
     implementation(libs.securityCrypto)
     implementation(libs.firebase.auth)
