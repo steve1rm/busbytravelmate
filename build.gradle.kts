@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.ktfmt) apply false
     alias(libs.plugins.kotlinxParcelize) apply false
     alias(libs.plugins.googleServices) apply false
+    alias(libs.plugins.ksp) apply false
 }
 
 allprojects {

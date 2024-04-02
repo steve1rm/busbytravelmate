@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.kotlinxParcelize)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -85,6 +86,8 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.koin)
+  //  implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
