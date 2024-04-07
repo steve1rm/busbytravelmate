@@ -1,12 +1,10 @@
 package me.androidbox.data.remote.service.imp
 
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.delay
 import me.androidbox.APIResponse
 import me.androidbox.data.remote.service.UserLoginRegisterRemoteDataSource
 import timber.log.Timber
 import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class UserLoginRegisterRemoteDataSourceImp(private val firebaseAuth: FirebaseAuth) : UserLoginRegisterRemoteDataSource {

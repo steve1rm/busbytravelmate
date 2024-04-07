@@ -5,7 +5,6 @@ import me.androidbox.repository.userValidationRepository.UserValidationRepositor
 import me.androidbox.repository.userValidationRepository.usecases.LoginUserWithEmailAndPasswordUseCase
 import org.koin.core.annotation.Factory
 
-@Factory
 class LoginUserWithEmailAndPasswordUseCaseImp(private val userValidationRepository: UserValidationRepository) : LoginUserWithEmailAndPasswordUseCase {
     override suspend fun execute(email: String, password: String): APIResponse<String?> {
         return userValidationRepository.loginUser(email, password)

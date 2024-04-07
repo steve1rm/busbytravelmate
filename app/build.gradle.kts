@@ -56,7 +56,20 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+  /*  sourceSets {
+        getByName("main") {
+            java.srcDirs(File("build/generated/ksp/debug/kotlin"))
+        }
+    }*/
 }
+
+ksp {
+    /* Compile time checking, similar to dagger and hilt */
+    arg("KOIN_CONFIG_CHECK", "true")
+    arg("KOIN_DEFAULT_MODULE", "false")
+}
+
 
 // example: git commit -am"chore: (android) adds conventional commits"
 // see: https://github.com/nicolasfara/conventional-commits

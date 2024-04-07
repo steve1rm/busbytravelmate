@@ -16,7 +16,6 @@ import me.androidbox.repository.userValidationRepository.usecases.RequestUserTok
 import org.koin.android.annotation.KoinViewModel
 import timber.log.Timber
 
-@KoinViewModel
 class UserValidationViewModel(
     private val requestUserTokenUseCase: RequestUserTokenUseCase,
     private val getUserTokenUseCase: GetUserTokenUseCase,

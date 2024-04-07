@@ -9,6 +9,8 @@ import me.androidbox.data.remote.service.imp.UserLoginRegisterRemoteDataSourceIm
 import me.androidbox.data.repository.userValidationRepository.UserValidationRepositoryImp
 import me.androidbox.repository.userValidationRepository.UserValidationRepository
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 import org.koin.dsl.module
 
 val repositoryModule = module {

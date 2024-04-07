@@ -4,7 +4,6 @@ import me.androidbox.repository.userValidationRepository.UserValidationRepositor
 import me.androidbox.repository.userValidationRepository.usecases.SaveUserTokenUseCase
 import org.koin.core.annotation.Factory
 
-@Factory
 class SaveUserTokenUseCaseImp(private val userValidationRepository: UserValidationRepository) :
     SaveUserTokenUseCase {
     override suspend fun execute(userToken: String) {

@@ -9,6 +9,7 @@ import me.androidbox.mappers.toUserTokenRequestDto
 import me.androidbox.model.UserTokenModel
 import me.androidbox.model.UserTokenRequestModel
 import me.androidbox.repository.userValidationRepository.UserValidationRepository
+import org.koin.core.annotation.Single
 
 
 class UserValidationRepositoryImp(

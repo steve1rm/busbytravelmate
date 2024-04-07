@@ -11,6 +11,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import me.androidbox.data.BuildConfig
+import me.androidbox.data.remote.service.UserTokenRemoteDataSource
 import me.androidbox.data.remote.service.imp.UserTokenRemoteDataSourceImp
 import org.koin.dsl.module
 
@@ -36,7 +37,7 @@ val networkModule = module {
         }
     }
 
-    factory<me.androidbox.data.remote.service.UserTokenRemoteDataSource> {
+    factory<UserTokenRemoteDataSource> {
         UserTokenRemoteDataSourceImp(this.get<HttpClient>())
     }
 

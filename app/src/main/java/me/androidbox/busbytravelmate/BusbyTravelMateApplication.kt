@@ -30,7 +30,7 @@ class BusbyTravelMateApplication : Application() {
                 networkModule,
                 repositoryModule,
                 useCaseModule,
-                userModule
+                userModule,
             )
         }
     }

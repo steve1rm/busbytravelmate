@@ -5,7 +5,6 @@ import me.androidbox.repository.userValidationRepository.UserValidationRepositor
 import me.androidbox.repository.userValidationRepository.usecases.IsLoggedInUseCase
 import org.koin.core.annotation.Factory
 
-@Factory
 class IsLoggedInUseCaseImp(private val userValidationRepository: UserValidationRepository) : IsLoggedInUseCase {
     override suspend fun execute(): APIResponse<Boolean> {
         return userValidationRepository.isLoggedIn()

@@ -5,6 +5,7 @@ import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import me.androidbox.data.local.UserTokenLocalDataSource
+import org.koin.core.annotation.Single
 
 /** Should be singleton */
 class UserTokenLocalDataSourceImp(context: Context) : UserTokenLocalDataSource {
