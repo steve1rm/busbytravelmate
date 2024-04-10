@@ -11,7 +11,7 @@ import me.androidbox.model.UserTokenRequestModel
 import me.androidbox.repository.userValidationRepository.UserValidationRepository
 import org.koin.core.annotation.Single
 
-
+@Single
 class UserValidationRepositoryImp(
     private val userTokenLocalDataSource: UserTokenLocalDataSource,
     private val userTokenRemoteDataSource: UserTokenRemoteDataSource,

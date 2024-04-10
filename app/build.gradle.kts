@@ -57,17 +57,17 @@ android {
         }
     }
 
-  /*  sourceSets {
+    sourceSets {
         getByName("main") {
             java.srcDirs(File("build/generated/ksp/debug/kotlin"))
         }
-    }*/
+    }
 }
 
 ksp {
     /* Compile time checking, similar to dagger and hilt */
     arg("KOIN_CONFIG_CHECK", "true")
-    arg("KOIN_DEFAULT_MODULE", "false")
+   // arg("KOIN_DEFAULT_MODULE", "true")
 }
 
 

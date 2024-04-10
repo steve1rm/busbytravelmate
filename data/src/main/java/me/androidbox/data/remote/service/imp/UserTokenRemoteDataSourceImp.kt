@@ -20,6 +20,7 @@ import me.androidbox.data.remote.service.Routes.TOKEN_URL
 import me.androidbox.data.remote.service.UserTokenRemoteDataSource
 import me.androidbox.safeApiRequest
 import org.koin.core.annotation.Single
+import javax.inject.Singleton
 
 class UserTokenRemoteDataSourceImp(private val httpClient: HttpClient) : UserTokenRemoteDataSource {
 
