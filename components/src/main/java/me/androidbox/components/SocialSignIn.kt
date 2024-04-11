@@ -50,12 +50,12 @@ fun SocialSignIn(
                 .background(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(8.dp))
                 .border(width = 0.1.dp, color = MaterialTheme.colorScheme.onSecondaryContainer, shape = RoundedCornerShape(8.dp)),
             onClick = { /*TODO*/ }) {
-           Image(
+            Image(
                 modifier = Modifier.size(20.dp),
                 contentScale = ContentScale.Fit,
                 painter = painterResource(id = R.drawable.apple_icon),
                 contentDescription = "apple",
-               colorFilter = ColorFilter.tint(Color.White)
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.inverseSurface)
             )
         }
 
