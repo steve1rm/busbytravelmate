@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.serialization)
-    alias(libs.plugins.googleServices)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -39,6 +39,18 @@ android {
     buildFeatures {
         this.buildConfig = true
     }
+
+    sourceSets {
+        getByName("main") {
+            java.srcDirs(File("build/generated/ksp/debug/kotlin"))
+        }
+    }
+}
+
+ksp {
+    /* Compile time checking, similar to dagger and hilt */
+    arg("KOIN_CONFIG_CHECK", "true")
+//    arg("KOIN_DEFAULT_MODULE", "false")
 }
 
 dependencies {
@@ -52,6 +64,9 @@ dependencies {
 
     implementation(libs.koin.ktor)
     implementation(libs.koin.android)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
+
 
     implementation(libs.securityCrypto)
     implementation(libs.firebase.auth)

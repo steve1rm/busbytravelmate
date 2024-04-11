@@ -5,6 +5,7 @@ import me.androidbox.model.UserTokenModel
 import me.androidbox.model.UserTokenRequestModel
 import me.androidbox.repository.userValidationRepository.UserValidationRepository
 import me.androidbox.repository.userValidationRepository.usecases.RequestUserTokenUseCase
+import org.koin.core.annotation.Factory
 
 class RequestUserTokenUseCaseImp(private val userTokenRepository: UserValidationRepository) :
     RequestUserTokenUseCase {

@@ -13,6 +13,7 @@ import me.androidbox.repository.userValidationRepository.usecases.LoginUserWithE
 import me.androidbox.repository.userValidationRepository.usecases.LogoutUseCase
 import me.androidbox.repository.userValidationRepository.usecases.RegisterUserWithEmailAndPasswordUseCase
 import me.androidbox.repository.userValidationRepository.usecases.RequestUserTokenUseCase
+import org.koin.android.annotation.KoinViewModel
 import timber.log.Timber
 
 class UserValidationViewModel(

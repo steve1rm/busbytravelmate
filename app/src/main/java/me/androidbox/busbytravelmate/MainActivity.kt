@@ -3,6 +3,7 @@ package me.androidbox.busbytravelmate
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -15,11 +16,13 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import me.androidbox.busbytravelmate.userValidation.routes.LoginScreenRoute
 import me.androidbox.busbytravelmate.ui.theme.BusbyTravelMateTheme
+import me.androidbox.busbytravelmate.userValidation.viewmodels.TestKoinViewModel
 import me.androidbox.busbytravelmate.userValidation.viewmodels.UserValidationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
     private val userRepositoryViewModel by viewModel<UserValidationViewModel>()
+    private val testKoinViewModel by viewModels<TestKoinViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val userValidationState by userRepositoryViewModel.userValidationState.collectAsStateWithLifecycle()
 
+            println(testKoinViewModel.displayMessage())
             LaunchedEffect(key1 = false) {
                 userRepositoryViewModel.requestUserToken()
             }

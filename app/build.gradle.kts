@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.kotlinxParcelize)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -48,14 +49,27 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.11"
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    sourceSets {
+        getByName("main") {
+            java.srcDirs(File("build/generated/ksp/debug/kotlin"))
+        }
+    }
 }
+
+ksp {
+    /* Compile time checking, similar to dagger and hilt */
+    arg("KOIN_CONFIG_CHECK", "true")
+   // arg("KOIN_DEFAULT_MODULE", "true")
+}
+
 
 // example: git commit -am"chore: (android) adds conventional commits"
 // see: https://github.com/nicolasfara/conventional-commits
@@ -85,6 +99,8 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.koin)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

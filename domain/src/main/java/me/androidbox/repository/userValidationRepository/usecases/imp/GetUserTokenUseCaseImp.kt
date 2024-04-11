@@ -2,6 +2,7 @@ package me.androidbox.repository.userValidationRepository.usecases.imp
 
 import me.androidbox.repository.userValidationRepository.UserValidationRepository
 import me.androidbox.repository.userValidationRepository.usecases.GetUserTokenUseCase
+import org.koin.core.annotation.Factory
 
 class GetUserTokenUseCaseImp(private val userValidationRepository: UserValidationRepository) :
     GetUserTokenUseCase {
