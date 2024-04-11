@@ -1,11 +1,14 @@
 package me.androidbox.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 
-/*
+
 @Module
 @ComponentScan
 class SharedPreferenceModule {
@@ -32,10 +35,10 @@ class SharedPreferenceModule {
         return androidContext.get()
     }
 }
-*/
 
 
-val sharedPreferenceModule = module {
+
+/*val sharedPreferenceModule = module {
     single {
         val masterKeys = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
         val FILE_NAME = "secret_shared_prefs"
@@ -48,5 +51,5 @@ val sharedPreferenceModule = module {
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
-}
+}*/
 

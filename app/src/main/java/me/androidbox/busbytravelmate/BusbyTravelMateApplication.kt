@@ -6,6 +6,7 @@ import me.androidbox.busbytravelmate.di.TestKoinViewModelModule
 import me.androidbox.busbytravelmate.di.userModule
 import me.androidbox.data.BuildConfig
 import me.androidbox.di.RepositoryModule
+import me.androidbox.di.SharedPreferenceModule
 import me.androidbox.di.networkModule
 import me.androidbox.di.sharedPreferenceModule
 import me.androidbox.di.useCaseModule
@@ -35,7 +36,7 @@ class BusbyTravelMateApplication : Application() {
                 useCaseModule,
                 userModule,
                 TestKoinViewModelModule().module,
-                sharedPreferenceModule,
+                SharedPreferenceModule().module,
             )
         }
     }
