@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,8 +31,8 @@ fun SocialSignIn(
         IconButton(
             modifier = Modifier
                 .size(width = 56.dp, height = 44.dp)
-                .background(color = Color.DarkGray, shape = RoundedCornerShape(8.dp))
-                .border(width = 0.1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
+                .background(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(8.dp))
+                .border(width = 0.1.dp, color = MaterialTheme.colorScheme.onSecondaryContainer, shape = RoundedCornerShape(8.dp)),
             colors = IconButtonDefaults.iconButtonColors(
                 containerColor = Color.Transparent
             ),
@@ -45,22 +47,23 @@ fun SocialSignIn(
         IconButton(
             modifier = Modifier
                 .size(width = 56.dp, height = 44.dp)
-                .background(color = Color.DarkGray, shape = RoundedCornerShape(8.dp))
-                .border(width = 0.1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
+                .background(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(8.dp))
+                .border(width = 0.1.dp, color = MaterialTheme.colorScheme.onSecondaryContainer, shape = RoundedCornerShape(8.dp)),
             onClick = { /*TODO*/ }) {
-           Image(
+            Image(
                 modifier = Modifier.size(20.dp),
                 contentScale = ContentScale.Fit,
                 painter = painterResource(id = R.drawable.apple_icon),
-                contentDescription = "apple"
+                contentDescription = "apple",
+                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.inverseSurface)
             )
         }
 
         IconButton(
             modifier = Modifier
                 .size(width = 56.dp, height = 44.dp)
-                .background(color = Color.DarkGray, shape = RoundedCornerShape(8.dp))
-                .border(width = 0.1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
+                .background(color = MaterialTheme.colorScheme.secondaryContainer, shape = RoundedCornerShape(8.dp))
+                .border(width = 0.1.dp, color = MaterialTheme.colorScheme.onSecondaryContainer, shape = RoundedCornerShape(8.dp)),
             onClick = {  }) {
             Image(
                 modifier = Modifier.size(20.dp),

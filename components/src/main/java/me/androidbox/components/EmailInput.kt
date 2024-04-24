@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -55,7 +56,7 @@ fun EmailInput(
             modifier = Modifier.align(Alignment.Start),
             text = "Email",
             style = LocalTextStyle.current.copy(
-                color = Color.LightGray,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontSize = 14.sp
             ))
 
@@ -67,20 +68,20 @@ fun EmailInput(
                 .height(56.dp)
                 .background(
                     brush = Brush.linearGradient(
-                        listOf(Color.DarkGray, Color.Black)
+                        listOf(MaterialTheme.colorScheme.secondaryContainer, MaterialTheme.colorScheme.onSecondary)
                     ),
                     shape = RoundedCornerShape(size = 8.dp)
                 )
                 .border(
                     width = 0.1.dp,
-                    color = Color.LightGray,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                     shape = RoundedCornerShape(size = 8.dp)
                 ),
-            cursorBrush = SolidColor(Color.LightGray),
+            cursorBrush = SolidColor(MaterialTheme.colorScheme.onPrimaryContainer),
             value = currentValue,
             onValueChange = onEmailChange,
             lineLimits = TextFieldLineLimits.SingleLine,
-            textStyle = LocalTextStyle.current.copy(color = Color.LightGray, fontSize = 20.sp),
+            textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onPrimaryContainer, fontSize = 20.sp),
             keyboardActions = keyboardActions,
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
@@ -104,7 +105,8 @@ fun EmailInput(
                             contentDescription = "",
                             modifier = Modifier
                                 .padding(8.dp)
-                                .size(32.dp)
+                                .size(32.dp),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
 
                         textFieldDecorator()

@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -35,10 +36,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -71,7 +70,7 @@ fun PasswordInput(
             modifier = Modifier.align(Alignment.Start),
             text = "Password",
             style = LocalTextStyle.current.copy(
-                color = Color.LightGray,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontSize = 14.sp))
 
         Spacer(modifier = Modifier.height(2.dp))
@@ -83,15 +82,15 @@ fun PasswordInput(
                 .focusRequester(focusRequester ?: FocusRequester())
                 .background(
                     brush = Brush.linearGradient(
-                        listOf(Color.DarkGray, Color.Black)
+                        listOf(MaterialTheme.colorScheme.secondaryContainer, MaterialTheme.colorScheme.onSecondary)
                     ),
                     shape = RoundedCornerShape(8.dp)
                 )
-                .border(width = 0.1.dp, color = Color.LightGray, shape = RoundedCornerShape(8.dp)),
-            cursorBrush = SolidColor(Color.LightGray),
+                .border(width = 0.1.dp, color = MaterialTheme.colorScheme.onPrimaryContainer, shape = RoundedCornerShape(8.dp)),
+            cursorBrush = SolidColor(MaterialTheme.colorScheme.onPrimaryContainer),
             value = currentValue,
             onValueChange = onValueChange,
-            textStyle = LocalTextStyle.current.copy(color = Color.LightGray, fontSize = 20.sp),
+            textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onPrimaryContainer, fontSize = 20.sp),
             decorator = { textFieldDecorator ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -108,7 +107,8 @@ fun PasswordInput(
                             contentDescription = "",
                             modifier = Modifier
                                 .padding(8.dp)
-                                .size(32.dp)
+                                .size(32.dp),
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
 
                         textFieldDecorator()
@@ -130,7 +130,7 @@ fun PasswordInput(
                                 } else {
                                     visibilityOffIcon
                                 },
-                                tint = Color.White,
+                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
                                 contentDescription = label
                             )
                         }
@@ -156,7 +156,7 @@ fun PasswordInput(
                 textAlign = TextAlign.End,
                 text = "Forgot password?",
                 style = LocalTextStyle.current.copy(
-                    color = Color.Gray,
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
                     fontSize = 12.sp
                 ))
         }
