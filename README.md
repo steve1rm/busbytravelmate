@@ -12,6 +12,7 @@ Travel and hotels finder app
 - [x] Material design 3
 - [x] Firebase authentication
 - [x] Amadeus rest API
+- [x] Voyager for navigation
 
 Dark Theme
 
